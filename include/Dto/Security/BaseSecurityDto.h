@@ -11,15 +11,14 @@ namespace DTO
         class BaseSecurityDto
         {
             public:
-                BaseSecurityDto();
                 virtual ~BaseSecurityDto();
 
                 string GetUsername() { return m_Username; }
                 void SetUsername(string val) { m_Username = val; }
 
             protected:
+                BaseSecurityDto(string Username);
 
-            private:
                 string m_Username;
         };
     }
