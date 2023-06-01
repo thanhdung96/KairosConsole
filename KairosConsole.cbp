@@ -12,8 +12,18 @@
 				<Option type="1" />
 				<Option compiler="clang" />
 				<Compiler>
+					<Add option="-m64" />
+					<Add option="-Weverything" />
 					<Add option="-g" />
+					<Add option="-std=c++20" />
+					<Add option="-lcurl" />
+					<Add directory="include" />
+					<Add directory="curlpp/include" />
+					<Add directory="include/Dto/Security" />
 				</Compiler>
+				<Linker>
+					<Add option="-m64" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/KairosConsole" prefix_auto="1" extension_auto="1" />
@@ -21,9 +31,16 @@
 				<Option type="1" />
 				<Option compiler="clang" />
 				<Compiler>
+					<Add option="-m64" />
 					<Add option="-O2" />
+					<Add option="-std=c++20" />
+					<Add option="-lcurl" />
+					<Add directory="include" />
+					<Add directory="include/Response" />
+					<Add directory="include/Dto/Security" />
 				</Compiler>
 				<Linker>
+					<Add option="-m64" />
 					<Add option="-s" />
 				</Linker>
 			</Target>
@@ -32,7 +49,17 @@
 			<Add option="-Weverything" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Dto/Security/ActivateDto.h" />
+		<Unit filename="include/Dto/Security/BaseSecurityDto.h" />
+		<Unit filename="include/Dto/Security/ChangePasswordDto.h" />
+		<Unit filename="include/Dto/Security/LoginDto.h" />
+		<Unit filename="include/Response/BaseResponse.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Dto/Security/ActivateDto.cpp" />
+		<Unit filename="src/Dto/Security/BaseSecurityDto.cpp" />
+		<Unit filename="src/Dto/Security/ChangePasswordDto.cpp" />
+		<Unit filename="src/Dto/Security/LoginDto.cpp" />
+		<Unit filename="src/Response/BaseResponse.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
