@@ -1,4 +1,4 @@
-#include "ChangePasswordDto.h"
+#include "Dto/Security/ChangePasswordDto.h"
 using namespace DTO::Security;
 
 ChangePasswordDto::ChangePasswordDto(string Username, string OldPassword, string NewPassword): BaseSecurityDto(Username)

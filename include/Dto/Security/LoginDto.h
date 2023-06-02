@@ -2,27 +2,29 @@
 #define LOGINDTO_
 
 #include <string>
-#include "BaseSecurityDto.h"
+#include "Network/Json/json.hpp"
+#include "Dto/Security/BaseSecurityDto.h"
 
-namespace DTO
+namespace DTO::Security
 {
-    namespace Security
+    using namespace std;
+    using json = nlohmann::json;
+
+    class LoginDto: public BaseSecurityDto
     {
-        using namespace std;
-        class LoginDto: public BaseSecurityDto
-        {
-            public:
-                LoginDto(string Username, string Password);
-                LoginDto();
-                virtual ~LoginDto() override;
+        public:
+            LoginDto(string Username, string Password);
+            LoginDto();
+            ~LoginDto() override = default;
 
-                string GetPassword() { return m_Password; }
-                void SetPassword(string val) { m_Password = val; }
+            string GetPassword() { return m_Password; }
+            void SetPassword(string val) { m_Password = val; }
 
-            private:
-                string m_Password;
-        };
-    }
+            void FromJson(const json& jsonObject) override;
+            json ToJson() override;
+        private:
+            string m_Password;
+    };
 }
 
 #endif // LOGINDTO_
