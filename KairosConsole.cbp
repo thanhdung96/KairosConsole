@@ -53,12 +53,14 @@
 		<Unit filename="include/Dto/Security/BaseSecurityDto.h" />
 		<Unit filename="include/Dto/Security/ChangePasswordDto.h" />
 		<Unit filename="include/Dto/Security/LoginDto.h" />
+		<Unit filename="include/Network/ApiHandler.h" />
 		<Unit filename="include/Response/BaseResponse.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Dto/Security/ActivateDto.cpp" />
 		<Unit filename="src/Dto/Security/BaseSecurityDto.cpp" />
 		<Unit filename="src/Dto/Security/ChangePasswordDto.cpp" />
 		<Unit filename="src/Dto/Security/LoginDto.cpp" />
+		<Unit filename="src/Network/ApiHandler.cpp" />
 		<Unit filename="src/Response/BaseResponse.cpp" />
 		<Extensions />
 	</Project>

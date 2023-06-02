@@ -1,4 +1,4 @@
-#include "ActivateDto.h"
+#include "Dto/Security/ActivateDto.h"
 using namespace DTO::Security;
 
 ActivateDto::ActivateDto(): BaseSecurityDto("")
