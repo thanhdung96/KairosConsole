@@ -16,7 +16,7 @@ int main()
     apiHandler.setMModel(Constants::ApiModel::Security);
     apiHandler.setMAction(Constants::ApiAction::Login);
     apiHandler.setRequestBody(requestBody);
-    cout << apiHandler.Execute(Constants::RequestMethod::POST) << endl;
+    cout << apiHandler.Execute(ApiHandler::RequestMethod::POST) << endl;
 
     return 0;
 }
