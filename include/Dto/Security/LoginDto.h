@@ -2,7 +2,7 @@
 #define LOGINDTO_
 
 #include <string>
-#include "Network/Json/json.hpp"
+#include "Network/Helper/json.hpp"
 #include "Dto/Security/BaseSecurityDto.h"
 
 namespace DTO::Security

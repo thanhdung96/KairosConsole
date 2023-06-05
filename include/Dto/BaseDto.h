@@ -2,7 +2,7 @@
 #define KAIROSCONSOLE_BASEDTO_H
 
 #include <string>
-#include "Network/Json/json.hpp"
+#include "Network/Helper/json.hpp"
 
 namespace DTO {
     using json = nlohmann::json;

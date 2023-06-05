@@ -2,7 +2,7 @@
 #define BASESECURITYDTO_H
 
 #include <string>
-#include "Network/Json/json.hpp"
+#include "Network/Helper/json.hpp"
 #include "Dto/BaseDto.h"
 
 namespace DTO::Security

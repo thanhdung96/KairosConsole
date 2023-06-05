@@ -2,11 +2,19 @@
 #include "Network/ApiHandler.h"
 using namespace Network;
 
+ApiHandler::ApiHandler() {
+    m_UriBuilder.setScheme(Helper::HTTPS_SCHEME);
+    // m_UriBuilder.setPort(Helper::HTTPS_PORT);
+    m_UriBuilder.setMIncludePortNumber(false);
+    m_UriBuilder.setMIncludeLastSlash(false);
+}
+
 const string &ApiHandler::getMDomain() const {
     return m_Domain;
 }
 
 void ApiHandler::setMDomain(const string &mDomain) {
+    m_UriBuilder.setHost(mDomain);
     m_Domain = mDomain;
 }
 
@@ -50,41 +58,7 @@ void ApiHandler::setMEntityId(const string &mEntityId) {
     m_EntityId = mEntityId;
 }
 
-string ApiHandler::constructUrl() {
-    stringstream urlStream;
-
-    urlStream << m_Domain;
-    if(m_Domain[m_Domain.size() - 1] != '/'){
-        urlStream << '/';
-    }
-
-    if(!m_Role.empty()){
-        urlStream << m_Role;
-        if(m_Role[m_Role.size() - 1] != '/'){
-            urlStream << '/';
-        }
-    }
-
-    urlStream << m_Model;
-    if(m_Model[m_Model.size() - 1] != '/'){
-        urlStream << '/';
-    }
-
-    urlStream << m_Action;
-    if(m_Action[m_Action.size() - 1] != '/' && !m_EntityId.empty()){
-        urlStream << '/';
-    }
-
-    if(!m_EntityId.empty()){
-        urlStream << m_EntityId;
-    }
-
-    string url;
-    urlStream >> url;
-    return url;
-}
-
-string ApiHandler::Execute(Constants::RequestMethod requestMethod) {
+string ApiHandler::Execute(RequestMethod requestMethod) {
     if(!m_CurlHandler) {
         throw runtime_error("Failed to initialize Curl");
     }
@@ -92,25 +66,27 @@ string ApiHandler::Execute(Constants::RequestMethod requestMethod) {
     string response;
     CURLcode res;
 
-    std::cout << this->constructUrl().c_str();
+    this->buildPath();
+    string url = this->m_UriBuilder.toString();
+    std::cout << url.c_str();
     curl_easy_setopt(
         m_CurlHandler.get(),
         CURLOPT_URL,
-        this->constructUrl().c_str()
+        url.c_str()
     );
 
     curl_easy_setopt(m_CurlHandler.get(), CURLOPT_WRITEFUNCTION, &WriteResponse);
     curl_easy_setopt(m_CurlHandler.get(), CURLOPT_WRITEDATA, &response);
 
     switch (requestMethod) {
-        case Constants::RequestMethod::POST:
+        case RequestMethod::POST:
             curl_easy_setopt(m_CurlHandler.get(), CURLOPT_POSTFIELDS, m_requestBody.c_str());
             break;
-        case Constants::RequestMethod::PATCH:
+        case RequestMethod::PATCH:
             break;
-        case Constants::RequestMethod::DELETE:
+        case RequestMethod::DELETE:
             break;
-        case Constants::RequestMethod::GET:
+        case RequestMethod::GET:
             break;
     }
 
@@ -122,3 +98,16 @@ string ApiHandler::Execute(Constants::RequestMethod requestMethod) {
 
     return response;
 }
+
+void ApiHandler::buildPath() {
+    m_UriBuilder.clearPath();
+    m_UriBuilder.pushPath(m_Role);
+    m_UriBuilder.pushPath(m_Model);
+    m_UriBuilder.pushPath(m_Action);
+    m_UriBuilder.pushPath(m_EntityId);
+}
+
+void ApiHandler::buildQuery() {
+    m_UriBuilder.clearQuery();
+}
+

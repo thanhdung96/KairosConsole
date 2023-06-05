@@ -5,13 +5,8 @@
 using namespace std;
 
 namespace Network::Constants {
-    enum RequestMethod {
-        GET,
-        POST,
-        PATCH,
-        DELETE
-    };
-
+    const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
+    
     class ApiModel {
         public:
             constexpr static const string Security = "security";
@@ -63,7 +58,5 @@ namespace Network::Constants {
             ApiAction() = default;
             ~ApiAction() = default;
     };
-
-    const string DEFAULT_DOMAIN = "https://stg-kairos.bymati.vn/api";
 }
 #endif //KAIROSCONSOLE_HTTPCONSTANTS_H

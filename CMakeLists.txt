@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(include)
 
-set (CMAKE_CXX_FLAGS "-lcurl")
+set(CMAKE_CXX_FLAGS "-lcurl")
 
 add_executable(KairosConsole
         include/Dto/Security/ActivateDto.h
@@ -20,7 +20,7 @@ add_executable(KairosConsole
         src/Dto/Security/LoginDto.cpp
         src/Network/ApiHandler.cpp
         include/Network/HTTPConstants.h
-        include/Network/Json/json.hpp
+        include/Network/Helper/json.hpp
         src/Response/BaseResponse.cpp
         main.cpp
-        include/Dto/BaseDto.h src/Dto/BaseDto.cpp)
+        include/Dto/BaseDto.h src/Dto/BaseDto.cpp src/Network/Helper/UriBuilder.cpp include/Network/Helper/UriBuilder.h)
