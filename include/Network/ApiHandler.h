@@ -6,8 +6,9 @@
 #include <sstream>
 #include <memory>
 #include <stdexcept>
-#include "HTTPConstants.h"
+#include "Constants/ApiConstants.h"
 #include "Helper/UriBuilder.h"
+#include "Helper/HTTPHeader.h"
 
 namespace Network {
     using namespace std;
@@ -44,21 +45,17 @@ namespace Network {
         private:
             UPtrCurl m_CurlHandler = UPtrCurl(curl_easy_init(), curl_easy_cleanup);
 
+            UriBuilder m_UriBuilder;
+            Header m_Header;
             string m_Domain;
             string m_Role;
             string m_Model;
             string m_Action;
             string m_EntityId;
             string m_requestBody;
-            UriBuilder m_UriBuilder;
 
         private:
-            static size_t WriteResponse(void* ptr, size_t size, size_t nmemb, void* userdata) {
-                size_t real_size = size * nmemb;
-                std::string* response = static_cast<std::string*>(userdata);
-                response->append(static_cast<char*>(ptr), real_size);
-                return real_size;
-            }
+            static size_t WriteResponse(void* ptr, size_t size, size_t nmemb, void* userdata);
 
             void buildPath();
             void buildQuery();

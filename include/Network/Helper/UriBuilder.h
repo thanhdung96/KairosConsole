@@ -5,13 +5,10 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "Network/HTTPConstants.h"
+#include "Network/Constants/ApiConstants.h"
 
 namespace Network::Helper{
     using namespace std;
-
-    const string HTTPS_SCHEME = "https";
-    const string HTTPS_PORT = "443";
 
     class UriBuilder {
         public:
@@ -75,7 +72,4 @@ namespace Network::Helper{
 
     typedef pair<UriBuilder::Component, string> UriComponentPair;
 }
-
-
-
 #endif //KAIROSCONSOLE_URIBUILDER_H

@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Network/ApiHandler.h"
-#include "Network/HTTPConstants.h"
+#include "Network/Constants/ApiConstants.h"
 #include "Dto/Security/LoginDto.h"
 using namespace Network;
 using namespace DTO::Security;

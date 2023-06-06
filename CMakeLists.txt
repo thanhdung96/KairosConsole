@@ -19,8 +19,8 @@ add_executable(KairosConsole
         src/Dto/Security/ChangePasswordDto.cpp
         src/Dto/Security/LoginDto.cpp
         src/Network/ApiHandler.cpp
-        include/Network/HTTPConstants.h
+        include/Network/Constants/ApiConstants.h
         include/Network/Helper/json.hpp
         src/Response/BaseResponse.cpp
         main.cpp
-        include/Dto/BaseDto.h src/Dto/BaseDto.cpp src/Network/Helper/UriBuilder.cpp include/Network/Helper/UriBuilder.h)
+        include/Dto/BaseDto.h src/Dto/BaseDto.cpp src/Network/Helper/UriBuilder.cpp include/Network/Helper/UriBuilder.h include/Network/Helper/HTTPHeader.h src/Network/Helper/HTTPHeader.cpp)
