@@ -1,12 +1,11 @@
-#include <iostream>
 #include "Network/ApiHandler.h"
 using namespace Network;
 
 ApiHandler::ApiHandler() {
-    m_UriBuilder.setScheme(Helper::HTTPS_SCHEME);
-    // m_UriBuilder.setPort(Helper::HTTPS_PORT);
+    m_UriBuilder.setScheme(Constants::HTTPS_SCHEME);
     m_UriBuilder.setMIncludePortNumber(false);
     m_UriBuilder.setMIncludeLastSlash(false);
+    curl_easy_setopt(m_CurlHandler.get(), CURLOPT_HTTPHEADER, m_Header.getHeader().get());
 }
 
 const string &ApiHandler::getMDomain() const {
@@ -68,7 +67,6 @@ string ApiHandler::Execute(RequestMethod requestMethod) {
 
     this->buildPath();
     string url = this->m_UriBuilder.toString();
-    std::cout << url.c_str();
     curl_easy_setopt(
         m_CurlHandler.get(),
         CURLOPT_URL,
@@ -92,10 +90,6 @@ string ApiHandler::Execute(RequestMethod requestMethod) {
 
     res = curl_easy_perform(m_CurlHandler.get());
 
-    if(res != CURLE_OK) {
-        cout << "failed to perform: " << res << endl;
-    }
-
     return response;
 }
 
@@ -111,3 +105,9 @@ void ApiHandler::buildQuery() {
     m_UriBuilder.clearQuery();
 }
 
+size_t ApiHandler::WriteResponse(void *ptr, size_t size, size_t nmemb, void *userdata) {
+    size_t real_size = size * nmemb;
+    string* response = static_cast<std::string*>(userdata);
+    response->append(static_cast<char*>(ptr), real_size);
+    return real_size;
+}

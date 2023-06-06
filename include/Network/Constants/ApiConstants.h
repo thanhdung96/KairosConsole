@@ -1,12 +1,14 @@
-#ifndef KAIROSCONSOLE_HTTPCONSTANTS_H
-#define KAIROSCONSOLE_HTTPCONSTANTS_H
+#ifndef KAIROSCONSOLE_APICONSTANTS_H
+#define KAIROSCONSOLE_APICONSTANTS_H
 
 #include <string>
 using namespace std;
 
 namespace Network::Constants {
     const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
-    
+    const string HTTPS_SCHEME = "https";
+    const string HTTPS_PORT = "443";
+
     class ApiModel {
         public:
             constexpr static const string Security = "security";
@@ -59,4 +61,4 @@ namespace Network::Constants {
             ~ApiAction() = default;
     };
 }
-#endif //KAIROSCONSOLE_HTTPCONSTANTS_H
+#endif //KAIROSCONSOLE_APICONSTANTS_H
