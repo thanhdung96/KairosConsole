@@ -11,16 +11,16 @@ namespace Network::Constants {
 
     class ApiModel {
         public:
-            constexpr static const string Security = "security";
-            constexpr static const string App = "app";
-            constexpr static const string MyRequest = "my-requests";
-            constexpr static const string User = "users";
-            constexpr static const string LeaveRequest = "leave-requests";
-            constexpr static const string Contact = "contacts";
-            constexpr static const string Report = "report";
-            constexpr static const string Process = "process";
-            constexpr static const string Holiday = "holiday";
-            constexpr static const string LeaveType = "leave-types";
+            inline static const string Security = "security";
+            inline static const string App = "app";
+            inline static const string MyRequest = "my-requests";
+            inline static const string User = "users";
+            inline static const string LeaveRequest = "leave-requests";
+            inline static const string Contact = "contacts";
+            inline static const string Report = "report";
+            inline static const string Process = "process";
+            inline static const string Holiday = "holiday";
+            inline static const string LeaveType = "leave-types";
 
         protected:
             ApiModel() = default;
@@ -29,9 +29,9 @@ namespace Network::Constants {
 
     class ApiRole {
         public:
-            constexpr static const string Admin = "admin";
-            constexpr static const string Manager = "manager";
-            constexpr static const string User = "user";
+            inline static const string Admin = "admin";
+            inline static const string Manager = "manager";
+            inline static const string User = "user";
         protected:
             ApiRole() = default;
             ~ApiRole() = default;
@@ -39,23 +39,23 @@ namespace Network::Constants {
 
     class ApiAction {
         public:
-            constexpr static const string Login = "login";
-            constexpr static const string Activate = "activate";
-            constexpr static const string Reset = "reset";
-            constexpr static const string Cancel = "cancel";
-            constexpr static const string Change = "change";
-            constexpr static const string Profile = "profile";
-            constexpr static const string ProfileAvatar = "profile/avatar";
-            constexpr static const string ProfileNotificationSetting = "profile/setting";
-            constexpr static const string List = "list";
-            constexpr static const string Summary = "summary";
-            constexpr static const string ReportBirthday = "report/birthday";
-            constexpr static const string ReportHoliday = "report/holidays";
+            inline static const string Login = "login";
+            inline static const string Activate = "activate";
+            inline static const string Reset = "reset";
+            inline static const string Cancel = "cancel";
+            inline static const string Change = "change";
+            inline static const string Profile = "profile";
+            inline static const string ProfileAvatar = "profile/avatar";
+            inline static const string ProfileNotificationSetting = "profile/setting";
+            inline static const string List = "list";
+            inline static const string Summary = "summary";
+            inline static const string ReportBirthday = "report/birthday";
+            inline static const string ReportHoliday = "report/holidays";
             /**
              * NOTE: process routes are not properly fixed on backend yet.
              * This action will fail for absolutely sure
              */
-            constexpr static const string Process = "process...";
+            inline static const string Process = "process...";
         protected:
             ApiAction() = default;
             ~ApiAction() = default;

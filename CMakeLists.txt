@@ -1,26 +1,19 @@
 cmake_minimum_required(VERSION 3.25)
 project(KairosConsole)
-
 set(CMAKE_CXX_STANDARD 20)
-
-include_directories(include)
-
 set(CMAKE_CXX_FLAGS "-lcurl")
+set(CMAKE_PREFIX_PATH "/home/thanhdung/Qt5.12.12/5.12.12")
 
-add_executable(KairosConsole
-        include/Dto/Security/ActivateDto.h
-        include/Dto/Security/BaseSecurityDto.h
-        include/Dto/Security/ChangePasswordDto.h
-        include/Dto/Security/LoginDto.h
-        include/Response/BaseResponse.h
-        include/Network/ApiHandler.h
-        src/Dto/Security/ActivateDto.cpp
-        src/Dto/Security/BaseSecurityDto.cpp
-        src/Dto/Security/ChangePasswordDto.cpp
-        src/Dto/Security/LoginDto.cpp
-        src/Network/ApiHandler.cpp
-        include/Network/Constants/ApiConstants.h
-        include/Network/Helper/json.hpp
-        src/Response/BaseResponse.cpp
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
+include_directories(include KairosQt/include)
+file(GLOB_RECURSE SOURCE_DIR "src/*.cpp")
+file(GLOB_RECURSE SOURCE_QT_DIR "KairosQt/src/*.cpp")
+
+add_executable(
+        KairosConsole
         main.cpp
-        include/Dto/BaseDto.h src/Dto/BaseDto.cpp src/Network/Helper/UriBuilder.cpp include/Network/Helper/UriBuilder.h include/Network/Helper/HTTPHeader.h src/Network/Helper/HTTPHeader.cpp)
+        ${SOURCE_DIR}
+        ${SOURCE_QT_DIR}
+)
+
+target_link_libraries(KairosConsole Qt5::Widgets)
