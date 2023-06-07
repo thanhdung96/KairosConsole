@@ -57,13 +57,12 @@ void ApiHandler::setMEntityId(const string &mEntityId) {
     m_EntityId = mEntityId;
 }
 
-string ApiHandler::Execute(RequestMethod requestMethod) {
+ const BaseResponse ApiHandler::Execute(RequestMethod requestMethod) {
     if(!m_CurlHandler) {
         throw runtime_error("Failed to initialize Curl");
     }
 
-    string response;
-    CURLcode res;
+    string responseData;
 
     this->buildPath();
     string url = this->m_UriBuilder.toString();
@@ -74,7 +73,7 @@ string ApiHandler::Execute(RequestMethod requestMethod) {
     );
 
     curl_easy_setopt(m_CurlHandler.get(), CURLOPT_WRITEFUNCTION, &WriteResponse);
-    curl_easy_setopt(m_CurlHandler.get(), CURLOPT_WRITEDATA, &response);
+    curl_easy_setopt(m_CurlHandler.get(), CURLOPT_WRITEDATA, &responseData);
 
     switch (requestMethod) {
         case RequestMethod::POST:
@@ -88,7 +87,13 @@ string ApiHandler::Execute(RequestMethod requestMethod) {
             break;
     }
 
-    res = curl_easy_perform(m_CurlHandler.get());
+    curl_easy_perform(m_CurlHandler.get());
+    long httpResponseCode;
+    curl_easy_getinfo(m_CurlHandler.get(), CURLINFO_RESPONSE_CODE, &httpResponseCode);
+
+    BaseResponse response;
+    response.setResponseCode(httpResponseCode);
+    response.setResponseData(responseData);
 
     return response;
 }

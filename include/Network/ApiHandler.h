@@ -9,10 +9,12 @@
 #include "Constants/ApiConstants.h"
 #include "Helper/UriBuilder.h"
 #include "Helper/HTTPHeader.h"
+#include "Response/BaseResponse.h"
 
 namespace Network {
     using namespace std;
     using namespace Network::Helper;
+    using namespace DataResponse;
     typedef unique_ptr<CURL, decltype(&curl_easy_cleanup)> UPtrCurl;
 
     class ApiHandler {
@@ -27,7 +29,7 @@ namespace Network {
             ApiHandler();
             ~ApiHandler() = default;
 
-            string Execute(RequestMethod requestMethod);
+            const BaseResponse Execute(RequestMethod requestMethod);
 
             const string &getMDomain() const;
             void setMDomain(const string &mDomain);

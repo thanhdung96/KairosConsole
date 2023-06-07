@@ -7,6 +7,7 @@
 #include <QString>
 #include "Network/ApiHandler.h"
 #include "Network/Constants/ApiConstants.h"
+#include "Response/BaseResponse.h"
 #include "Dto/Security/LoginDto.h"
 using namespace Network;
 using namespace DTO::Security;
@@ -32,8 +33,8 @@ public slots:
 
 private:
     Ui::LoginDialog *ui;
-    bool loginSuccess;
-    ApiHandler apiHandler;
+    bool m_LoginSuccess;
+    ApiHandler m_ApiHandler;
 };
 
-#endif  LOGINDIALOG_H
+#endif  //LOGINDIALOG_H
