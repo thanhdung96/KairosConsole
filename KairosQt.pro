@@ -41,7 +41,7 @@ HEADERS += \
     include/Network/Helper/HTTPHeader.h \
     include/Network/Helper/UriBuilder.h \
     include/Network/Helper/json.hpp \
-    include/Response/BaseResponse.h
+	include/Response/BaseResponse.h
 
 FORMS += \
     KairosQt/design/logindialog.ui \

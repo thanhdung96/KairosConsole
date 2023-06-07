@@ -6,12 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>601</width>
-    <height>378</height>
+    <width>500</width>
+    <height>180</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>180</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>180</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Login To Kairos</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -34,7 +46,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txtPassword"/>
+      <widget class="QLineEdit" name="txtPassword">
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -92,9 +108,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QTextEdit" name="txtTextEdit"/>
    </item>
   </layout>
  </widget>
