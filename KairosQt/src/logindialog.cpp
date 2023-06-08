@@ -10,6 +10,15 @@ LoginDialog::LoginDialog(QWidget *parent) :
 
     connect(ui->btnCancel, SIGNAL(clicked()), this, SLOT(btnCancelClicked()));
     connect(ui->btnLogin, SIGNAL(clicked()), this, SLOT(btnLoginClicked()));
+    connect(ui->btnShowPassword, SIGNAL(pressed()), this, SLOT(btnShowPasswordPressed()));
+    connect(ui->btnShowPassword, SIGNAL(released()), this, SLOT(btnShowPasswordReleased()));
+
+    connect(
+        &m_ApiHandler,
+        SIGNAL(requestFinished(BaseResponse)),
+        this,
+        SLOT(getResponse(BaseResponse))
+    );
 }
 
 LoginDialog::~LoginDialog()
@@ -26,18 +35,31 @@ void LoginDialog::btnLoginClicked() {
         ui->txtUsername->text().toStdString(),
         ui->txtPassword->text().toStdString()
     );
-    string requestBody = loginDto.ToJson().dump();
 
     m_ApiHandler.setMDomain(Constants::DEFAULT_DOMAIN);
     m_ApiHandler.setMModel(Constants::ApiModel::Security);
     m_ApiHandler.setMAction(Constants::ApiAction::Login);
-    m_ApiHandler.setRequestBody(requestBody);
-    BaseResponse response = m_ApiHandler.Execute(ApiHandler::RequestMethod::POST);
+    m_ApiHandler.setRequestBody(loginDto.ToJson().dump());
+    m_ApiHandler.Execute(ApiHandler::RequestMethod::POST);
+}
 
+void LoginDialog::btnShowPasswordPressed()
+{
+    ui->txtPassword->setEchoMode(QLineEdit::Normal);
+}
+
+void LoginDialog::btnShowPasswordReleased()
+{
+    ui->txtPassword->setEchoMode(QLineEdit::Password);
+}
+
+void LoginDialog::getResponse(BaseResponse response)
+{
     if(response.ResponseCode() == BaseResponse::Status::HTTP_UNAUTHORIZED) {
         m_LoginSuccess = false;
     } else if (response.ResponseCode() == BaseResponse::Status::HTTP_OK) {
         m_LoginSuccess = true;
+        Session::setJwtToken(response.ResponseData("token"));
         this->close();
     }
 }

@@ -1,9 +1,15 @@
-#include "Response/BaseResponse.h"
-using namespace DataResponse;
+#include "Network/Helper/BaseResponse.h"
+using namespace Network::Helper;
 
 BaseResponse::BaseResponse()
 {
     m_ResponseCode = Status::HTTP_OK;
+}
+
+BaseResponse::BaseResponse(long responseCode, const string& responseData)
+{
+    this->setResponseCode(responseCode);
+    this->setResponseData(responseData);
 }
 
 BaseResponse::~BaseResponse()
@@ -40,9 +46,5 @@ string BaseResponse::GetRawResponse() const
 
 BaseResponse BaseResponse::operator=(const BaseResponse &otherBaseReponse)
 {
-    BaseResponse newBaseResponse;
-    newBaseResponse.setResponseCode(otherBaseReponse.ResponseCode());
-    newBaseResponse.setResponseData(otherBaseReponse.GetRawResponse());
-
-    return newBaseResponse;
+    return BaseResponse(otherBaseReponse.ResponseCode(), otherBaseReponse.GetRawResponse());
 }

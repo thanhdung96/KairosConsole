@@ -1,23 +1,22 @@
 #ifndef KAIROSCONSOLE_APIHANDLER_H
 #define KAIROSCONSOLE_APIHANDLER_H
 
-#include <curl/curl.h>
-#include <string>
-#include <sstream>
-#include <memory>
-#include <stdexcept>
-#include "Constants/ApiConstants.h"
 #include "Helper/UriBuilder.h"
-#include "Helper/HTTPHeader.h"
-#include "Response/BaseResponse.h"
+#include "Helper/BaseRequest.h"
+#include "Helper/BaseResponse.h"
+#include "Network/Constants/ApiConstants.h"
+#include <string>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
 namespace Network {
     using namespace std;
     using namespace Network::Helper;
-    using namespace DataResponse;
-    typedef unique_ptr<CURL, decltype(&curl_easy_cleanup)> UPtrCurl;
 
-    class ApiHandler {
+    class ApiHandler: public QObject {
+        Q_OBJECT
+
         public:
             enum class RequestMethod {
                 GET,
@@ -27,9 +26,9 @@ namespace Network {
             };
 
             ApiHandler();
-            ~ApiHandler() = default;
+            ~ApiHandler();
 
-            const BaseResponse Execute(RequestMethod requestMethod);
+            void Execute(RequestMethod requestMethod);
 
             const string &getMDomain() const;
             void setMDomain(const string &mDomain);
@@ -44,23 +43,25 @@ namespace Network {
             const string &getMEntityId() const;
             void setMEntityId(const string &EntityId);
 
-        private:
-            UPtrCurl m_CurlHandler = UPtrCurl(curl_easy_init(), curl_easy_cleanup);
+        signals:
+            void requestFinished(BaseResponse);
 
+        private:
             UriBuilder m_UriBuilder;
-            Header m_Header;
             string m_Domain;
             string m_Role;
             string m_Model;
             string m_Action;
             string m_EntityId;
             string m_requestBody;
+            QNetworkAccessManager* m_NwManager;
 
         private:
-            static size_t WriteResponse(void* ptr, size_t size, size_t nmemb, void* userdata);
-
             void buildPath();
             void buildQuery();
+
+        private slots:
+            void finishedSlot(QNetworkReply* reply);
     };
 }
 #endif //KAIROSCONSOLE_APIHANDLER_H

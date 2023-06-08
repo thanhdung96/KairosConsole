@@ -7,8 +7,11 @@
 #include <QString>
 #include "Network/ApiHandler.h"
 #include "Network/Constants/ApiConstants.h"
-#include "Response/BaseResponse.h"
+#include "Network/Helper/BaseResponse.h"
 #include "Dto/Security/LoginDto.h"
+#include "App/Session.h"
+
+using namespace App;
 using namespace Network;
 using namespace DTO::Security;
 
@@ -27,9 +30,12 @@ public:
     bool getLoginSuccess() const;
     void setLoginSuccess(bool newLoginSuccess);
 
-public slots:
+private slots:
     void btnCancelClicked();
     void btnLoginClicked();
+    void btnShowPasswordPressed();
+    void btnShowPasswordReleased();
+    void getResponse(BaseResponse response);
 
 private:
     Ui::LoginDialog *ui;
