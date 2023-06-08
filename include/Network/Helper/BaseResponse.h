@@ -4,7 +4,7 @@
 #include <string>
 #include "Network/Helper/json.hpp"
 
-namespace DataResponse
+namespace Network::Helper
 {
     using namespace std;
     using json = nlohmann::json;
@@ -23,6 +23,7 @@ namespace DataResponse
                 HTTP_INTERNAL_SERVER_ERROR = 500
             };
             BaseResponse();
+            BaseResponse(long responseCode, const string &responseData);
             ~BaseResponse();
 
             long ResponseCode() const;

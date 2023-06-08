@@ -5,7 +5,13 @@ ApiHandler::ApiHandler() {
     m_UriBuilder.setScheme(Constants::HTTPS_SCHEME);
     m_UriBuilder.setMIncludePortNumber(false);
     m_UriBuilder.setMIncludeLastSlash(false);
-    curl_easy_setopt(m_CurlHandler.get(), CURLOPT_HTTPHEADER, m_Header.getHeader().get());
+    m_NwManager = new QNetworkAccessManager(this);
+    connect(m_NwManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(finishedSlot(QNetworkReply*)));
+}
+
+ApiHandler::~ApiHandler()
+{
+    m_NwManager->deleteLater();
 }
 
 const string &ApiHandler::getMDomain() const {
@@ -57,45 +63,19 @@ void ApiHandler::setMEntityId(const string &mEntityId) {
     m_EntityId = mEntityId;
 }
 
- const BaseResponse ApiHandler::Execute(RequestMethod requestMethod) {
-    if(!m_CurlHandler) {
-        throw runtime_error("Failed to initialize Curl");
-    }
-
-    string responseData;
-
+void ApiHandler::Execute(RequestMethod requestMethod) {
     this->buildPath();
-    string url = this->m_UriBuilder.toString();
-    curl_easy_setopt(
-        m_CurlHandler.get(),
-        CURLOPT_URL,
-        url.c_str()
-    );
-
-    curl_easy_setopt(m_CurlHandler.get(), CURLOPT_WRITEFUNCTION, &WriteResponse);
-    curl_easy_setopt(m_CurlHandler.get(), CURLOPT_WRITEDATA, &responseData);
+    QNetworkRequest request = BaseRequest::getBaseNetworkRequest(m_UriBuilder.toString());
+    QByteArray postData = QByteArray::fromStdString(m_requestBody);
 
     switch (requestMethod) {
         case RequestMethod::POST:
-            curl_easy_setopt(m_CurlHandler.get(), CURLOPT_POSTFIELDS, m_requestBody.c_str());
+            m_NwManager->post(request, postData);
             break;
-        case RequestMethod::PATCH:
-            break;
-        case RequestMethod::DELETE:
-            break;
-        case RequestMethod::GET:
+        default:
             break;
     }
 
-    curl_easy_perform(m_CurlHandler.get());
-    long httpResponseCode;
-    curl_easy_getinfo(m_CurlHandler.get(), CURLINFO_RESPONSE_CODE, &httpResponseCode);
-
-    BaseResponse response;
-    response.setResponseCode(httpResponseCode);
-    response.setResponseData(responseData);
-
-    return response;
 }
 
 void ApiHandler::buildPath() {
@@ -110,9 +90,12 @@ void ApiHandler::buildQuery() {
     m_UriBuilder.clearQuery();
 }
 
-size_t ApiHandler::WriteResponse(void *ptr, size_t size, size_t nmemb, void *userdata) {
-    size_t real_size = size * nmemb;
-    string* response = static_cast<std::string*>(userdata);
-    response->append(static_cast<char*>(ptr), real_size);
-    return real_size;
+void ApiHandler::finishedSlot(QNetworkReply* reply)
+{
+    emit requestFinished(BaseResponse(
+            reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(),
+            QString(reply->readAll()).toStdString()
+        )
+    );
+    reply->deleteLater();
 }
