@@ -2,18 +2,11 @@
 #define LOGINDIALOG_H
 
 #include <QDialog>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QString>
+#include <QCloseEvent>
+#include <QObject>
+#include <QNetworkReply>
 #include "Network/ApiHandler.h"
-#include "Network/Constants/ApiConstants.h"
-#include "Network/Helper/BaseResponse.h"
-#include "Dto/Security/LoginDto.h"
-#include "App/Session.h"
-
-using namespace App;
 using namespace Network;
-using namespace DTO::Security;
 
 namespace Ui {
 class LoginDialog;
@@ -27,20 +20,26 @@ public:
     explicit LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
 
-    bool getLoginSuccess() const;
-    void setLoginSuccess(bool newLoginSuccess);
+signals:
+    void authenticationSuccess();
+    void authenticationFailed();
+
+public slots:
+    void onFinished(QNetworkReply*);
 
 private slots:
     void btnCancelClicked();
     void btnLoginClicked();
     void btnShowPasswordPressed();
     void btnShowPasswordReleased();
-    void getResponse(BaseResponse response);
 
 private:
     Ui::LoginDialog *ui;
     bool m_LoginSuccess;
     ApiHandler m_ApiHandler;
+
+private:
+    void closeEvent(QCloseEvent *event) override;
 };
 
 #endif  //LOGINDIALOG_H

@@ -12,11 +12,6 @@ BaseResponse::BaseResponse(long responseCode, const string& responseData)
     this->setResponseData(responseData);
 }
 
-BaseResponse::~BaseResponse()
-{
-    //dtor
-}
-
 long BaseResponse::ResponseCode() const
 {
     return m_ResponseCode;
@@ -33,10 +28,8 @@ void BaseResponse::setResponseData(const string &newResponseData)
     m_ParsedResponseData = json::parse(newResponseData);
 }
 
-string BaseResponse::ResponseData(const string field) const
-{
-    string data = m_ParsedResponseData[field];
-    return data.empty() ? "" : data;
+const json& BaseResponse::getResponseData(){
+    return m_ParsedResponseData;
 }
 
 string BaseResponse::GetRawResponse() const

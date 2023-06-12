@@ -5,9 +5,9 @@
 using namespace std;
 
 namespace Network::Constants {
-    const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
-    const string HTTPS_SCHEME = "https";
-    const string HTTPS_PORT = "443";
+    inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
+    inline const string HTTPS_SCHEME = "https";
+    inline const string HTTPS_PORT = "443";
 
     class ApiModel {
         public:

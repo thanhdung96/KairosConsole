@@ -1,16 +1,11 @@
 #include "mainwindow.h"
-#include "logindialog.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    LoginDialog loginDialog;
-    loginDialog.show();
-    if(loginDialog.getLoginSuccess()) {
-        w.show();
-    }
-
+    w.setAttribute(Qt::WA_QuitOnClose);
+    w.show();
     return a.exec();
 }

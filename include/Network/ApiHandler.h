@@ -2,13 +2,9 @@
 #define KAIROSCONSOLE_APIHANDLER_H
 
 #include "Helper/UriBuilder.h"
-#include "Helper/BaseRequest.h"
-#include "Helper/BaseResponse.h"
-#include "Network/Constants/ApiConstants.h"
 #include <string>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QNetworkAccessManager>
 
 namespace Network {
     using namespace std;
@@ -26,9 +22,9 @@ namespace Network {
             };
 
             ApiHandler();
-            ~ApiHandler();
+            ~ApiHandler() = default;
 
-            void Execute(RequestMethod requestMethod);
+            void Execute(RequestMethod requestMethod, string receiverSlot);
 
             const string &getMDomain() const;
             void setMDomain(const string &mDomain);
@@ -43,9 +39,6 @@ namespace Network {
             const string &getMEntityId() const;
             void setMEntityId(const string &EntityId);
 
-        signals:
-            void requestFinished(BaseResponse);
-
         private:
             UriBuilder m_UriBuilder;
             string m_Domain;
@@ -54,14 +47,11 @@ namespace Network {
             string m_Action;
             string m_EntityId;
             string m_requestBody;
-            QNetworkAccessManager* m_NwManager;
+            QNetworkAccessManager m_NwManager;
 
         private:
             void buildPath();
             void buildQuery();
-
-        private slots:
-            void finishedSlot(QNetworkReply* reply);
     };
 }
 #endif //KAIROSCONSOLE_APIHANDLER_H

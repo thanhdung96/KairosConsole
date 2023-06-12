@@ -10,3 +10,23 @@ void Session::setJwtToken(const string &newJwtToken)
 {
     m_JwtToken = newJwtToken;
 }
+
+const string& Session::getUsername()
+{
+    return m_Username;
+}
+
+void Session::setUsername(const string &newUsername)
+{
+    m_Username = newUsername;
+}
+
+const string& Session::getEmail()
+{
+    return m_Email;
+}
+
+void Session::setEmail(const string &newEmail)
+{
+    m_Email = newEmail;
+}

@@ -44,8 +44,8 @@ HEADERS += \
     include/Network/Helper/json.hpp
 
 FORMS += \
-    KairosQt/design/logindialog.ui \
-    KairosQt/design/mainwindow.ui
+    KairosQt/design/mainwindow.ui \
+    KairosQt/design/security/logindialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
