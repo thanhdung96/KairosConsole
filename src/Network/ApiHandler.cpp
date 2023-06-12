@@ -1,17 +1,13 @@
 #include "Network/ApiHandler.h"
+#include <QNetworkRequest>
+#include "Network/Helper/BaseRequest.h"
+#include "Network/Constants/ApiConstants.h"
 using namespace Network;
 
 ApiHandler::ApiHandler() {
     m_UriBuilder.setScheme(Constants::HTTPS_SCHEME);
     m_UriBuilder.setMIncludePortNumber(false);
     m_UriBuilder.setMIncludeLastSlash(false);
-    m_NwManager = new QNetworkAccessManager(this);
-    connect(m_NwManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(finishedSlot(QNetworkReply*)));
-}
-
-ApiHandler::~ApiHandler()
-{
-    m_NwManager->deleteLater();
 }
 
 const string &ApiHandler::getMDomain() const {
@@ -63,19 +59,27 @@ void ApiHandler::setMEntityId(const string &mEntityId) {
     m_EntityId = mEntityId;
 }
 
-void ApiHandler::Execute(RequestMethod requestMethod) {
+void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
     this->buildPath();
     QNetworkRequest request = BaseRequest::getBaseNetworkRequest(m_UriBuilder.toString());
     QByteArray postData = QByteArray::fromStdString(m_requestBody);
+    m_NwManager.setParent(this);
+    connect(
+        &m_NwManager,
+        SIGNAL(finished(QNetworkReply*)),
+        this->parent(),
+        receiverSlot.c_str()
+    );
 
+    // default method is get
     switch (requestMethod) {
         case RequestMethod::POST:
-            m_NwManager->post(request, postData);
+            m_NwManager.post(request, postData);
             break;
         default:
+            m_NwManager.get(request);
             break;
     }
-
 }
 
 void ApiHandler::buildPath() {
@@ -88,14 +92,4 @@ void ApiHandler::buildPath() {
 
 void ApiHandler::buildQuery() {
     m_UriBuilder.clearQuery();
-}
-
-void ApiHandler::finishedSlot(QNetworkReply* reply)
-{
-    emit requestFinished(BaseResponse(
-            reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(),
-            QString(reply->readAll()).toStdString()
-        )
-    );
-    reply->deleteLater();
 }

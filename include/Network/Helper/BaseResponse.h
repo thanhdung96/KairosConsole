@@ -24,12 +24,12 @@ namespace Network::Helper
             };
             BaseResponse();
             BaseResponse(long responseCode, const string &responseData);
-            ~BaseResponse();
+            ~BaseResponse() = default;
 
             long ResponseCode() const;
             void setResponseCode(long newResponseCode);
             void setResponseData(const string &newResponseData);
-            string ResponseData(const string field) const;
+            const json& getResponseData();
             string GetRawResponse() const;
             BaseResponse operator=(const BaseResponse& otherBaseReponse);
 

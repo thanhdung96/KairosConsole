@@ -1,24 +1,32 @@
 #include "logindialog.h"
 #include "ui_logindialog.h"
+#include "Dto/Security/LoginDto.h"
+#include "App/Session.h"
+#include "Network/Constants/ApiConstants.h"
+#include "Network/Helper/BaseResponse.h"
+#include <QEventLoop>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QString>
+
+using namespace Network::Helper;
+using namespace DTO::Security;
 
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginDialog)
 {
+    m_LoginSuccess = false;
     ui->setupUi(this);
-    this->m_LoginSuccess = false;
+    ui->progressBar->hide();
+    ui->txtStatus->setText("Please provide your ID and password.");
 
-    connect(ui->btnCancel, SIGNAL(clicked()), this, SLOT(btnCancelClicked()));
-    connect(ui->btnLogin, SIGNAL(clicked()), this, SLOT(btnLoginClicked()));
-    connect(ui->btnShowPassword, SIGNAL(pressed()), this, SLOT(btnShowPasswordPressed()));
-    connect(ui->btnShowPassword, SIGNAL(released()), this, SLOT(btnShowPasswordReleased()));
+    m_ApiHandler.setParent(this);
 
-    connect(
-        &m_ApiHandler,
-        SIGNAL(requestFinished(BaseResponse)),
-        this,
-        SLOT(getResponse(BaseResponse))
-    );
+    connect(ui->btnCancel, &QPushButton::clicked, this, &LoginDialog::btnCancelClicked);
+    connect(ui->btnLogin, &QPushButton::clicked, this, &LoginDialog::btnLoginClicked);
+    connect(ui->btnShowPassword, &QPushButton::pressed, this, &LoginDialog::btnShowPasswordPressed);
+    connect(ui->btnShowPassword, &QPushButton::released, this, &LoginDialog::btnShowPasswordReleased);
 }
 
 LoginDialog::~LoginDialog()
@@ -31,6 +39,9 @@ void LoginDialog::btnCancelClicked() {
 }
 
 void LoginDialog::btnLoginClicked() {
+    ui->progressBar->hide();
+    ui->txtStatus->setText("Checking credential...");
+
     LoginDto loginDto(
         ui->txtUsername->text().toStdString(),
         ui->txtPassword->text().toStdString()
@@ -40,7 +51,8 @@ void LoginDialog::btnLoginClicked() {
     m_ApiHandler.setMModel(Constants::ApiModel::Security);
     m_ApiHandler.setMAction(Constants::ApiAction::Login);
     m_ApiHandler.setRequestBody(loginDto.ToJson().dump());
-    m_ApiHandler.Execute(ApiHandler::RequestMethod::POST);
+    m_ApiHandler.Execute(ApiHandler::RequestMethod::POST, SLOT(onFinished(QNetworkReply*)));
+    ui->progressBar->show();
 }
 
 void LoginDialog::btnShowPasswordPressed()
@@ -53,23 +65,32 @@ void LoginDialog::btnShowPasswordReleased()
     ui->txtPassword->setEchoMode(QLineEdit::Password);
 }
 
-void LoginDialog::getResponse(BaseResponse response)
+void LoginDialog::onFinished(QNetworkReply* reply)
 {
-    if(response.ResponseCode() == BaseResponse::Status::HTTP_UNAUTHORIZED) {
-        m_LoginSuccess = false;
-    } else if (response.ResponseCode() == BaseResponse::Status::HTTP_OK) {
-        m_LoginSuccess = true;
-        Session::setJwtToken(response.ResponseData("token"));
+    ui->progressBar->hide();
+    QEventLoop eventLoop;
+    connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
+    BaseResponse response(
+        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(),
+        QString(reply->readAll()).toStdString()
+    );
+    reply->deleteLater();
+
+    m_LoginSuccess = response.ResponseCode() == BaseResponse::Status::HTTP_OK;
+    if(m_LoginSuccess) {
+        App::Session::setJwtToken(response.getResponseData()["token"]);
         this->close();
+    } else {
+        ui->txtStatus->setText("Invalid credential.");
     }
 }
 
-bool LoginDialog::getLoginSuccess() const
+void LoginDialog::closeEvent(QCloseEvent* event)
 {
-    return m_LoginSuccess;
-}
-
-void LoginDialog::setLoginSuccess(bool newLoginSuccess)
-{
-    m_LoginSuccess = newLoginSuccess;
+    if(m_LoginSuccess) {
+        this->done(QDialog::Accepted);
+    } else {
+        this->done(QDialog::Rejected);
+    }
+    event->accept();
 }

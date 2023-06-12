@@ -1,12 +1,17 @@
 #include "Network/Helper/BaseRequest.h"
-using namespace Network::Helper;
+#include "App/Session.h"
+#include <QString>
+#include <QByteArray>
 
-QNetworkRequest BaseRequest::getBaseNetworkRequest(const string &url)
+using namespace Network::Helper;
+using namespace App;
+
+const QNetworkRequest BaseRequest::getBaseNetworkRequest(const string &url)
 {
     QNetworkRequest request;
     request.setUrl(QUrl(QString::fromStdString(url)));
-    request.setHeader(QNetworkRequest::KnownHeaders::ContentTypeHeader, &BaseRequest::JSON);
-    request.setHeader(QNetworkRequest::KnownHeaders::UserAgentHeader, &BaseRequest::USER_AGENT);
+    request.setRawHeader("User-Agent", QByteArray::fromStdString(BaseRequest::USER_AGENT));
+    request.setRawHeader("Content-Type", QByteArray::fromStdString(BaseRequest::JSON));
 
     if(!Session::getJwtToken().empty()) {
         request.setRawHeader("Authorization", QByteArray::fromStdString(Session::getJwtToken()));
