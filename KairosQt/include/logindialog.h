@@ -29,9 +29,9 @@ public slots:
 
 private slots:
     void btnCancelClicked();
-    void btnLoginClicked();
     void btnShowPasswordPressed();
     void btnShowPasswordReleased();
+    void doLogin();
 
 private:
     Ui::LoginDialog *ui;
@@ -39,7 +39,7 @@ private:
     ApiHandler m_ApiHandler;
 
 private:
-    void closeEvent(QCloseEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;;
 };
 
 #endif  //LOGINDIALOG_H

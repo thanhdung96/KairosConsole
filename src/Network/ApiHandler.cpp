@@ -2,6 +2,7 @@
 #include <QNetworkRequest>
 #include "Network/Helper/BaseRequest.h"
 #include "Network/Constants/ApiConstants.h"
+#include <exception>
 using namespace Network;
 
 ApiHandler::ApiHandler() {
@@ -64,17 +65,33 @@ void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
     QNetworkRequest request = BaseRequest::getBaseNetworkRequest(m_UriBuilder.toString());
     QByteArray postData = QByteArray::fromStdString(m_requestBody);
     m_NwManager.setParent(this);
+
+    if(!m_LastReceiverSlot.empty()) {
+        disconnect(
+            &m_NwManager,
+            SIGNAL(finished(QNetworkReply*)),
+            this->parent(),
+            m_LastReceiverSlot.c_str()
+        );
+    }
     connect(
         &m_NwManager,
         SIGNAL(finished(QNetworkReply*)),
         this->parent(),
         receiverSlot.c_str()
     );
+    m_LastReceiverSlot = receiverSlot;
 
     // default method is get
     switch (requestMethod) {
         case RequestMethod::POST:
             m_NwManager.post(request, postData);
+            break;
+        case RequestMethod::PATCH:
+            m_NwManager.sendCustomRequest(request, "PATCH", postData);
+            break;
+        case RequestMethod::DELETE:
+            throw std::exception();
             break;
         default:
             m_NwManager.get(request);

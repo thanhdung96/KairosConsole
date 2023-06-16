@@ -48,6 +48,7 @@ namespace Network {
             string m_EntityId;
             string m_requestBody;
             QNetworkAccessManager m_NwManager;
+            string m_LastReceiverSlot;
 
         private:
             void buildPath();

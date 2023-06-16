@@ -24,9 +24,11 @@ LoginDialog::LoginDialog(QWidget *parent) :
     m_ApiHandler.setParent(this);
 
     connect(ui->btnCancel, &QPushButton::clicked, this, &LoginDialog::btnCancelClicked);
-    connect(ui->btnLogin, &QPushButton::clicked, this, &LoginDialog::btnLoginClicked);
+    connect(ui->btnLogin, &QPushButton::clicked, this, &LoginDialog::doLogin);
     connect(ui->btnShowPassword, &QPushButton::pressed, this, &LoginDialog::btnShowPasswordPressed);
     connect(ui->btnShowPassword, &QPushButton::released, this, &LoginDialog::btnShowPasswordReleased);
+    connect(ui->txtUsername, &QLineEdit::returnPressed, this, &LoginDialog::doLogin);
+    connect(ui->txtPassword, &QLineEdit::returnPressed, this, &LoginDialog::doLogin);
 }
 
 LoginDialog::~LoginDialog()
@@ -36,23 +38,6 @@ LoginDialog::~LoginDialog()
 
 void LoginDialog::btnCancelClicked() {
     this->close();
-}
-
-void LoginDialog::btnLoginClicked() {
-    ui->progressBar->hide();
-    ui->txtStatus->setText("Checking credential...");
-
-    LoginDto loginDto(
-        ui->txtUsername->text().toStdString(),
-        ui->txtPassword->text().toStdString()
-    );
-
-    m_ApiHandler.setMDomain(Constants::DEFAULT_DOMAIN);
-    m_ApiHandler.setMModel(Constants::ApiModel::Security);
-    m_ApiHandler.setMAction(Constants::ApiAction::Login);
-    m_ApiHandler.setRequestBody(loginDto.ToJson().dump());
-    m_ApiHandler.Execute(ApiHandler::RequestMethod::POST, SLOT(onFinished(QNetworkReply*)));
-    ui->progressBar->show();
 }
 
 void LoginDialog::btnShowPasswordPressed()
@@ -93,4 +78,22 @@ void LoginDialog::closeEvent(QCloseEvent* event)
         this->done(QDialog::Rejected);
     }
     event->accept();
+}
+
+void LoginDialog::doLogin()
+{
+    ui->progressBar->hide();
+    ui->txtStatus->setText("Checking credential...");
+
+    LoginDto loginDto(
+        ui->txtUsername->text().toStdString(),
+        ui->txtPassword->text().toStdString()
+    );
+
+    m_ApiHandler.setMDomain(Constants::DEFAULT_DOMAIN);
+    m_ApiHandler.setMModel(Constants::ApiModel::Security);
+    m_ApiHandler.setMAction(Constants::ApiAction::Login);
+    m_ApiHandler.setRequestBody(loginDto.ToJson().dump());
+    m_ApiHandler.Execute(ApiHandler::RequestMethod::POST, SLOT(onFinished(QNetworkReply*)));
+    ui->progressBar->show();
 }
