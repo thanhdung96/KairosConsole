@@ -14,9 +14,13 @@ INCLUDEPATH += \
 
 SOURCES += \
     KairosQt/src/logindialog.cpp \
+    KairosQt/src/myprofilewidget.cpp \
     main.cpp \
     KairosQt/src/mainwindow.cpp \
+    src/App/DisplayLanguage.cpp \
     src/App/Session.cpp \
+    src/App/UserStatus.cpp \
+    src/Dto/App/ProfileDto.cpp \
     src/Dto/BaseDto.cpp \
     src/Dto/Security/ActivateDto.cpp \
     src/Dto/Security/BaseSecurityDto.cpp \
@@ -30,7 +34,11 @@ SOURCES += \
 HEADERS += \
     KairosQt/include/logindialog.h \
     KairosQt/include/mainwindow.h \
+    KairosQt/include/myprofilewidget.h \
+    include/App/Displaylanguage.h \
     include/App/Session.h \
+    include/App/UserStatus.h \
+    include/Dto/App/ProfileDto.h \
     include/Dto/BaseDto.h \
     include/Dto/Security/ActivateDto.h \
     include/Dto/Security/BaseSecurityDto.h \
@@ -45,6 +53,7 @@ HEADERS += \
 
 FORMS += \
     KairosQt/design/mainwindow.ui \
+    KairosQt/design/myprofilewidget.ui \
     KairosQt/design/security/logindialog.ui
 
 # Default rules for deployment.
