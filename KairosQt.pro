@@ -56,6 +56,9 @@ FORMS += \
     KairosQt/design/myprofilewidget.ui \
     KairosQt/design/security/logindialog.ui
 
+# Translation
+TRANSLATIONS = translation/main.en.ts translation/main.fr.ts translation/main.vi.ts
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
