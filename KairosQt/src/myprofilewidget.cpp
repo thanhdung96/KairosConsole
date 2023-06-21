@@ -53,12 +53,6 @@ void MyProfileWidget::onFetchProfile(QNetworkReply *reply)
         ui->txtPhoneNumber->setText(QString::fromStdString(m_ProfileDto.getPhoneNumber()));
         ui->txtIdNumber->setText(QString::fromStdString(m_ProfileDto.getCitizenId()));
         ui->txtSocialId->setText(QString::fromStdString(m_ProfileDto.getSocialInsurranceId()));
-        ui->cbxDisplayLanguage->setCurrentText(QString::fromStdString(
-                                    App::DisplayLanguage::resolve(
-                                        m_ProfileDto.getDisplayLanguage(),
-                                        App::DisplayLanguage::ResolveType::FromCode
-                                    )
-        ));
         ui->txtPermAddress->setText(QString::fromStdString(m_ProfileDto.getPermanentAddress()));
         ui->txtTempAddress->setText(QString::fromStdString(m_ProfileDto.getTempAddress()));
         ui->txtNationality->setText(QString::fromStdString(m_ProfileDto.getNationality()));
@@ -97,12 +91,6 @@ void MyProfileWidget::onBtnSaveClicked()
     profileDto.setCitizenId(ui->txtIdNumber->text().toStdString());
     profileDto.setSocialInsurranceId(ui->txtSocialId->text().toStdString());
     profileDto.setPhoneNumber(ui->txtPhoneNumber->text().toStdString());
-    profileDto.setDisplayLanguage(
-        App::DisplayLanguage::resolve(
-            ui->txtPhoneNumber->text().toStdString(),
-            App::DisplayLanguage::ResolveType::ToCode
-        )
-    );
     profileDto.setPhoneNumber(ui->txtPhoneNumber->text().toStdString());
     profileDto.setPermanentAddress(ui->txtPermAddress->text().toStdString());
     profileDto.setTempAddress(ui->txtTempAddress->text().toStdString());

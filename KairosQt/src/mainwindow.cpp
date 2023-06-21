@@ -9,7 +9,6 @@
 #include "Network/ApiHandler.h"
 #include "Network/Constants/ApiConstants.h"
 #include "App/Session.h"
-#include "myprofilewidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -32,6 +31,9 @@ MainWindow::~MainWindow()
     if(m_MyProfileWg != nullptr) {
         delete m_MyProfileWg;
     }
+    if(m_PreferenceWg != nullptr) {
+        delete m_PreferenceWg;
+    }
     delete ui;
 }
 
@@ -47,36 +49,36 @@ void MainWindow::onFetchProfile(QNetworkReply* reply)
 
     App::Session::setEmail(response.getResponseData()["account"]["email"]);
     App::Session::setUsername(response.getResponseData()["account"]["empCode"]);
+    App::Session::setRole(response.getResponseData()["account"]["role"]);
 }
 
 void MainWindow::onActionQuitTriggered(bool checked)
 {
     // destroying current widget, if any
-    QWidget* currentWidget = ui->swMain->currentWidget();
-    if(currentWidget != nullptr) {
-        ui->swMain->removeWidget(currentWidget);
-        delete currentWidget;
-        currentWidget = nullptr;
-    }
+    this->deleteCurrentWidget();
 
     QApplication::quit();
 }
 
 void MainWindow::onActionMyProfileTriggered(bool checked)
 {
-    QWidget* currentWidget = ui->swMain->currentWidget();
-    if(currentWidget != nullptr) {
-        ui->swMain->removeWidget(currentWidget);
-        delete currentWidget;
-        currentWidget = nullptr;
-    }
-
     if(m_MyProfileWg == nullptr) {
+        this->deleteCurrentWidget();
         m_MyProfileWg = new MyProfileWidget;
         ui->swMain->addWidget(m_MyProfileWg);
         this->setWindowTitle("My Profile");
         connect(m_MyProfileWg, SIGNAL(busy(QString)), this, SLOT(onWidgetBusy(QString)));
         connect(m_MyProfileWg, SIGNAL(ready(QString)), this, SLOT(onWidgetReady(QString)));
+    }
+}
+
+void MainWindow::onActionPreferenceTriggered(bool checked)
+{
+    if(m_PreferenceWg == nullptr) {
+        this->deleteCurrentWidget();
+        m_PreferenceWg = new PreferenceWidget;
+        ui->swMain->addWidget(m_PreferenceWg);
+        this->setWindowTitle("Preference");
     }
 }
 
@@ -94,6 +96,7 @@ void MainWindow::initialiseUI()
 {
     connect(ui->actionQuit, SIGNAL(triggered(bool)), this, SLOT(onActionQuitTriggered(bool)));
     connect(ui->actionMyProfile, SIGNAL(triggered(bool)), this, SLOT(onActionMyProfileTriggered(bool)));
+    connect(ui->actionPreference, SIGNAL(triggered(bool)), this, SLOT(onActionPreferenceTriggered(bool)));
 }
 
 void MainWindow::loadProfile()
@@ -103,4 +106,21 @@ void MainWindow::loadProfile()
     m_ApiHandler.setMModel(Constants::ApiModel::App);
     m_ApiHandler.setMAction(Constants::ApiAction::Profile);
     m_ApiHandler.Execute(ApiHandler::RequestMethod::GET, SLOT(onFetchProfile(QNetworkReply*)));
+}
+
+void MainWindow::deleteCurrentWidget()
+{
+    QWidget* currentWidget = ui->swMain->currentWidget();
+    if(currentWidget != nullptr) {
+        ui->swMain->removeWidget(currentWidget);
+        delete currentWidget;
+        currentWidget = nullptr;
+    }
+
+    if(m_MyProfileWg != nullptr) {
+        m_MyProfileWg = nullptr;
+    }
+    if(m_PreferenceWg != nullptr) {
+        m_PreferenceWg = nullptr;
+    }
 }

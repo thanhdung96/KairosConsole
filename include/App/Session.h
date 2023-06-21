@@ -11,12 +11,12 @@ namespace App {
         public:
             static const string& getJwtToken();
             static void setJwtToken(const string &newJwtToken);
-
             static const string& getUsername();
             static void setUsername(const string &newUsername);
-
             static const string& getEmail();
             static void setEmail(const string &newEmail);
+            static string getRole();
+            static void setRole(const string &newRole);
 
         private:
             Session() = default;
@@ -26,6 +26,7 @@ namespace App {
             inline static string m_JwtToken;
             inline static string m_Username;
             inline static string m_Email;
+            inline static string m_Role;
     };
 }
 

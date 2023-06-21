@@ -2,11 +2,14 @@
 #define DISPLAYLANGUAGE_H
 
 #include <map>
+#include <vector>
 #include <string>
 
 namespace App {
     using namespace std;
-    typedef map<string, string> LstLanguages;
+    typedef map<string, string> LstLanguageMapping;
+    typedef LstLanguageMapping::iterator LanguageMappingIterator;
+    typedef vector<string> LstLanguage;
 
     class DisplayLanguage
     {
@@ -17,7 +20,7 @@ namespace App {
             };
 
             static string resolve(const string& key, const ResolveType& resolveType);
-            static const LstLanguages getAllLanguagesAndCodes();
+            static const LstLanguage getAllLanguages();
 
         private:
             DisplayLanguage() = default;
@@ -25,7 +28,7 @@ namespace App {
             static void initList();
 
         private:
-            inline static LstLanguages m_LstSupportedLanguages;
+            inline static LstLanguageMapping m_LstSupportedLanguages;
     };
 }
 

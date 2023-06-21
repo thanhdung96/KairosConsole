@@ -30,3 +30,13 @@ void Session::setEmail(const string &newEmail)
 {
     m_Email = newEmail;
 }
+
+string Session::getRole()
+{
+    return m_Role;
+}
+
+void Session::setRole(const string &newRole)
+{
+    m_Role = newRole;
+}

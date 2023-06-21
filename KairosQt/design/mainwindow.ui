@@ -175,7 +175,7 @@
      <string>Application</string>
     </property>
     <addaction name="actionMyProfile"/>
-    <addaction name="actionNotification"/>
+    <addaction name="actionPreference"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
@@ -212,9 +212,9 @@
     <string>Quit</string>
    </property>
   </action>
-  <action name="actionNotification">
+  <action name="actionPreference">
    <property name="text">
-    <string>Notification</string>
+    <string>Preference</string>
    </property>
   </action>
   <action name="actionPending">

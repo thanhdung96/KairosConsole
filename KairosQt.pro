@@ -13,6 +13,7 @@ INCLUDEPATH += \
     $$PWD/include
 
 SOURCES += \
+    KairosQt/src/PreferenceWidget.cpp \
     KairosQt/src/logindialog.cpp \
     KairosQt/src/myprofilewidget.cpp \
     main.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
     src/App/Session.cpp \
     src/App/UserStatus.cpp \
     src/Dto/App/ProfileDto.cpp \
+    src/Dto/App/SettingDto.cpp \
     src/Dto/BaseDto.cpp \
     src/Dto/Security/ActivateDto.cpp \
     src/Dto/Security/BaseSecurityDto.cpp \
@@ -32,6 +34,7 @@ SOURCES += \
     src/Network/Helper/UriBuilder.cpp
 
 HEADERS += \
+    KairosQt/include/PreferenceWidget.h \
     KairosQt/include/logindialog.h \
     KairosQt/include/mainwindow.h \
     KairosQt/include/myprofilewidget.h \
@@ -39,6 +42,7 @@ HEADERS += \
     include/App/Session.h \
     include/App/UserStatus.h \
     include/Dto/App/ProfileDto.h \
+    include/Dto/App/SettingDto.h \
     include/Dto/BaseDto.h \
     include/Dto/Security/ActivateDto.h \
     include/Dto/Security/BaseSecurityDto.h \
@@ -48,13 +52,28 @@ HEADERS += \
     include/Network/Constants/ApiConstants.h \
     include/Network/Helper/BaseRequest.h \
     include/Network/Helper/BaseResponse.h \
-    include/Network/Helper/UriBuilder.h \
-    include/Network/Helper/json.hpp
+	include/Network/Helper/UriBuilder.h
 
 FORMS += \
+    KairosQt/design/app/PreferenceWidget.ui \
+    KairosQt/design/app/myprofilewidget.ui \
+    KairosQt/design/app/myprofilewidget.ui \
     KairosQt/design/mainwindow.ui \
-    KairosQt/design/myprofilewidget.ui \
     KairosQt/design/security/logindialog.ui
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+
+FORMS += \
+    KairosQt/design/app/PreferenceWidget.ui \
+    KairosQt/design/app/myprofilewidget.ui \
+    KairosQt/design/mainwindow.ui \
+    KairosQt/design/security/logindialog.ui
+
+PRECOMPILED_HEADER = include/Network/Helper/json.hpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

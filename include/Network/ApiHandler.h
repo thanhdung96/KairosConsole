@@ -28,8 +28,6 @@ namespace Network {
 
             const string &getMDomain() const;
             void setMDomain(const string &mDomain);
-            const string &getMRole() const;
-            void setMRole(const string &mRole);
             const string &getRequestBody() const;
             void setRequestBody(const string &requestBody);
             const string &getMModel() const;
@@ -42,7 +40,6 @@ namespace Network {
         private:
             UriBuilder m_UriBuilder;
             string m_Domain;
-            string m_Role;
             string m_Model;
             string m_Action;
             string m_EntityId;
@@ -51,7 +48,7 @@ namespace Network {
             string m_LastReceiverSlot;
 
         private:
-            void buildPath();
+            void buildPath(bool includeRole);
             void buildQuery();
     };
 }

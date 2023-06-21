@@ -93,7 +93,7 @@ void LoginDialog::doLogin()
     m_ApiHandler.setMDomain(Constants::DEFAULT_DOMAIN);
     m_ApiHandler.setMModel(Constants::ApiModel::Security);
     m_ApiHandler.setMAction(Constants::ApiAction::Login);
-    m_ApiHandler.setRequestBody(loginDto.ToJson().dump());
+    m_ApiHandler.setRequestBody(loginDto.ToJson(true).dump());
     m_ApiHandler.Execute(ApiHandler::RequestMethod::POST, SLOT(onFinished(QNetworkReply*)));
     ui->progressBar->show();
 }

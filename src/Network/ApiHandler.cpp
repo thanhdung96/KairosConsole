@@ -1,8 +1,10 @@
 #include "Network/ApiHandler.h"
 #include <QNetworkRequest>
+#include "App/Session.h"
 #include "Network/Helper/BaseRequest.h"
 #include "Network/Constants/ApiConstants.h"
 #include <exception>
+#include <algorithm>
 using namespace Network;
 
 ApiHandler::ApiHandler() {
@@ -18,14 +20,6 @@ const string &ApiHandler::getMDomain() const {
 void ApiHandler::setMDomain(const string &mDomain) {
     m_UriBuilder.setHost(mDomain);
     m_Domain = mDomain;
-}
-
-const string &ApiHandler::getMRole() const {
-    return m_Role;
-}
-
-void ApiHandler::setMRole(const string &mRole) {
-    m_Role = mRole;
 }
 
 const string &ApiHandler::getRequestBody() const {
@@ -61,7 +55,18 @@ void ApiHandler::setMEntityId(const string &mEntityId) {
 }
 
 void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
-    this->buildPath();
+    if(
+        find(
+            Constants::ApiModel::ModelWithoutRole.begin(),
+            Constants::ApiModel::ModelWithoutRole.end(),
+            m_Model
+        ) != Constants::ApiModel::ModelWithoutRole.end()
+    ) {
+        this->buildPath(true);
+    } else {
+        this->buildPath(false);
+    }
+
     QNetworkRequest request = BaseRequest::getBaseNetworkRequest(m_UriBuilder.toString());
     QByteArray postData = QByteArray::fromStdString(m_requestBody);
     m_NwManager.setParent(this);
@@ -99,9 +104,9 @@ void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
     }
 }
 
-void ApiHandler::buildPath() {
+void ApiHandler::buildPath(bool includeRole) {
     m_UriBuilder.clearPath();
-    m_UriBuilder.pushPath(m_Role);
+    m_UriBuilder.pushPath(includeRole ? App::Session::getRole() : "");
     m_UriBuilder.pushPath(m_Model);
     m_UriBuilder.pushPath(m_Action);
     m_UriBuilder.pushPath(m_EntityId);
