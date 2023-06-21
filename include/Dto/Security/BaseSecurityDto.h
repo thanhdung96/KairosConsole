@@ -20,7 +20,7 @@ namespace DTO::Security
             void SetUsername(string val) { m_Username = val; }
 
             void FromJson(const json& jsonObject) override;
-            json ToJson() override;
+            json ToJson(bool toSubmit) override;
         protected:
             string m_Username;
     };

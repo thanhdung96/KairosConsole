@@ -2,6 +2,7 @@
 #define KAIROSCONSOLE_APICONSTANTS_H
 
 #include <string>
+#include <vector>
 using namespace std;
 
 namespace Network::Constants {
@@ -21,6 +22,11 @@ namespace Network::Constants {
             inline static const string Process = "process";
             inline static const string Holiday = "holiday";
             inline static const string LeaveType = "leave-types";
+
+            inline static const vector<string> ModelWithoutRole = {
+                Security,
+                App
+            };
 
         protected:
             ApiModel() = default;
@@ -46,7 +52,7 @@ namespace Network::Constants {
             inline static const string Change = "change";
             inline static const string Profile = "profile";
             inline static const string ProfileAvatar = "profile/avatar";
-            inline static const string ProfileNotificationSetting = "profile/setting";
+            inline static const string ProfileSetting = "profile/setting";
             inline static const string List = "list";
             inline static const string Summary = "summary";
             inline static const string ReportBirthday = "report/birthday";

@@ -21,7 +21,7 @@ namespace DTO::Security
             void SetPassword(string val) { m_Password = val; }
 
             void FromJson(const json& jsonObject) override;
-            json ToJson() override;
+            json ToJson(bool toSubmit) override;
         private:
             string m_Password;
     };

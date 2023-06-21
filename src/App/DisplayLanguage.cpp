@@ -1,5 +1,4 @@
 #include "App/Displaylanguage.h"
-#include <iterator>
 using namespace App;
 
 string DisplayLanguage::resolve(const string &key, const ResolveType &resolveType = ResolveType::FromCode)
@@ -7,14 +6,21 @@ string DisplayLanguage::resolve(const string &key, const ResolveType &resolveTyp
     initList();
 
     string retData;
-
     switch (resolveType) {
         case ResolveType::FromCode:
             retData = DisplayLanguage::m_LstSupportedLanguages.find(key)->second;
             break;
         case ResolveType::ToCode:
-            retData = DisplayLanguage::m_LstSupportedLanguages.find(key)->first;
-            break;
+            for(
+                LanguageMappingIterator it = DisplayLanguage::m_LstSupportedLanguages.begin();
+                it != DisplayLanguage::m_LstSupportedLanguages.end();
+                it++
+            ) {
+                if(it->second == key) {
+                    retData = it->first;
+                    break;
+                }
+            }
         default:
             break;
     }
@@ -22,10 +28,20 @@ string DisplayLanguage::resolve(const string &key, const ResolveType &resolveTyp
     return retData;
 }
 
-const LstLanguages DisplayLanguage::getAllLanguagesAndCodes()
+const LstLanguage DisplayLanguage::getAllLanguages()
 {
     initList();
-    return DisplayLanguage::m_LstSupportedLanguages;
+    LstLanguage lstLanguages;
+
+    for(
+        LanguageMappingIterator it = DisplayLanguage::m_LstSupportedLanguages.begin();
+        it != DisplayLanguage::m_LstSupportedLanguages.end();
+        it++
+    ) {
+            lstLanguages.emplace_back(it->second);
+    }
+
+   return lstLanguages;
 }
 
 void DisplayLanguage::initList()

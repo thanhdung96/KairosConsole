@@ -116,16 +116,6 @@ void ProfileDto::setFirstWorkingDay(const string &newFirstWorkingDay)
     m_FirstWorkingDay = newFirstWorkingDay;
 }
 
-string ProfileDto::getDisplayLanguage() const
-{
-    return m_DisplayLanguage;
-}
-
-void ProfileDto::setDisplayLanguage(const string &newDisplayLanguage)
-{
-    m_DisplayLanguage = newDisplayLanguage;
-}
-
 int ProfileDto::getStatus() const
 {
     return m_Status;
@@ -199,9 +189,6 @@ const json ProfileDto::toJson(bool toSubmit)
     if(!m_Nationality.empty()) {
         js["nationality"] = m_Nationality;
     }
-    if(!m_DisplayLanguage.empty()) {
-        js["displayLanguage"] = m_DisplayLanguage;
-    }
     if(!m_FirstWorkingDay.empty()) {
         js["firstWorkDay"] = m_FirstWorkingDay;
     }
@@ -240,7 +227,6 @@ void ProfileDto::fromJson(const json &js)
     m_PermanentAddress = userJson["permanentAddress"];
     m_PhoneNumber = userJson["phoneNumber"];
     m_Nationality = userJson["nationality"];
-    m_DisplayLanguage = userJson["displayLanguage"];
     m_FirstWorkingDay = userJson["firstWorkDay"]["date"];
     m_FirstWorkingDay.resize(DATE_STRING_SIZE);
     m_Status = userJson["status"];

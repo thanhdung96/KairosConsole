@@ -16,7 +16,7 @@ void LoginDto::FromJson(const json &jsonObject) {
     m_Password = jsonObject["password"];
 }
 
-json LoginDto::ToJson() {
+json LoginDto::ToJson(bool toSubmit) {
     json jsonObject;
     jsonObject["username"] = m_Username;
     jsonObject["password"] = m_Password;

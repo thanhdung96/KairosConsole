@@ -156,9 +156,6 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="txtIdNumber"/>
        </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="txtSocialId"/>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
@@ -166,34 +163,8 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_15">
-         <property name="text">
-          <string>Display Language</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QComboBox" name="cbxDisplayLanguage">
-         <property name="editable">
-          <bool>false</bool>
-         </property>
-         <item>
-          <property name="text">
-           <string>Tiếng Việt</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>English</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Français</string>
-          </property>
-         </item>
-        </widget>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="txtSocialId"/>
        </item>
       </layout>
      </item>

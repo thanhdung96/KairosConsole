@@ -11,7 +11,7 @@ namespace DTO {
     class BaseDto {
         public:
             virtual void FromJson(const json& jsonObject);
-            virtual json ToJson();
+            virtual json ToJson(bool toSubmit);
 
         protected:
             BaseDto() = default;
