@@ -62,9 +62,9 @@ void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
             m_Model
         ) != Constants::ApiModel::ModelWithoutRole.end()
     ) {
-        this->buildPath(true);
-    } else {
         this->buildPath(false);
+    } else {
+        this->buildPath(true);
     }
 
     QNetworkRequest request = BaseRequest::getBaseNetworkRequest(m_UriBuilder.toString());

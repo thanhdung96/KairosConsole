@@ -12,12 +12,15 @@ namespace DTO::Security
         public:
             ChangePasswordDto();
             ChangePasswordDto(string Username, string OldPassword, string NewPassword);
-            ~ChangePasswordDto() override;
+            ~ChangePasswordDto() = default;
 
-            string GetOldPassword() { return m_OldPassword; }
-            void SetOldPassword(string val) { m_OldPassword = val; }
-            string GetNewPassword() { return m_NewPassword; }
-            void SetNewPassword(string val) { m_NewPassword = val; }
+            const string& getOldPassword();
+            void setOldPassword(const string &newOldPassword);
+            const string& getNewPassword();
+            void setNewPassword(const string &newNewPassword);
+
+            void FromJson(const json& jsonObject) override;
+            json ToJson(bool toSubmit) override;
 
         private:
             string m_OldPassword;
