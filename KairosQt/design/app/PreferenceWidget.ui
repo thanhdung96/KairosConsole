@@ -115,11 +115,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txtOldPassword">
-       <property name="echoMode">
-        <enum>QLineEdit::Normal</enum>
+	  <widget class="QLineEdit" name="txtOldPassword">
+	   <property name="echoMode">
+	    <enum>QLineEdit::Password</enum>
        </property>
-      </widget>
+	   </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_4">
@@ -131,7 +131,7 @@
      <item>
       <widget class="QLineEdit" name="txtNewPassword">
        <property name="echoMode">
-        <enum>QLineEdit::Normal</enum>
+        <enum>QLineEdit::Password</enum>
        </property>
       </widget>
      </item>

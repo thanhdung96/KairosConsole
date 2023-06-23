@@ -56,8 +56,7 @@ HEADERS += \
 
 FORMS += \
     KairosQt/design/app/PreferenceWidget.ui \
-    KairosQt/design/app/myprofilewidget.ui \
-    KairosQt/design/app/myprofilewidget.ui \
+	KairosQt/design/app/myprofilewidget.ui \
     KairosQt/design/mainwindow.ui \
     KairosQt/design/security/logindialog.ui
 
@@ -69,16 +68,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-
-FORMS += \
-    KairosQt/design/app/PreferenceWidget.ui \
-    KairosQt/design/app/myprofilewidget.ui \
-    KairosQt/design/mainwindow.ui \
-    KairosQt/design/security/logindialog.ui
-
 PRECOMPILED_HEADER = include/Network/Helper/json.hpp
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target

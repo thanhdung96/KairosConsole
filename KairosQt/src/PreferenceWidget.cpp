@@ -1,11 +1,14 @@
 #include "PreferenceWidget.h"
 #include <QEventLoop>
+#include <QMessageBox>
 #include <string>
 #include "Dto/App/SettingDto.h"
+#include "Dto/Security/ChangePasswordDto.h"
 #include "Network/Constants/ApiConstants.h"
 #include "Network/Helper/BaseResponse.h"
 #include "ui_PreferenceWidget.h"
 using namespace DTO::App;
+using namespace DTO::Security;
 
 PreferenceWidget::PreferenceWidget(QWidget *parent) :
     QWidget(parent),
@@ -27,7 +30,7 @@ PreferenceWidget::~PreferenceWidget()
 void PreferenceWidget::initialiseUi()
 {
     connect(ui->btnSaveSetting, SIGNAL(clicked()), this, SLOT(onBtnSaveSettingClicked()));
-    connect(ui->btnSavePassword, SIGNAL(clicked()), this, SLOT(onBtnSaveSettingClicked()));
+    connect(ui->btnSavePassword, SIGNAL(clicked()), this, SLOT(onBtnSavePasswordClicked()));
 
     m_LstSupportedLanguages = DisplayLanguage::getAllLanguages();
     foreach (std::string language, m_LstSupportedLanguages) {
@@ -70,7 +73,26 @@ void PreferenceWidget::onFetchPreference(QNetworkReply *reply)
 }
 
 void PreferenceWidget::onBtnSavePasswordClicked() {
+    this->setBusy(true, "Changing password...");
+    ChangePasswordDto changePasswordDto;
+    changePasswordDto.setNewPassword(ui->txtNewPassword->text().toStdString());
+    changePasswordDto.setOldPassword(ui->txtOldPassword->text().toStdString());
 
+    QMessageBox messageBox;
+    messageBox.setText("You are about to change your password");
+    messageBox.setInformativeText("KairosQt will automatically close for your account to be fully updated.");
+    messageBox.setStandardButtons(QMessageBox::StandardButton::Ok | QMessageBox::StandardButton::Cancel);
+    messageBox.setDefaultButton(QMessageBox::StandardButton::Ok);
+    int ret = messageBox.exec();
+
+    if(ret == QMessageBox::Ok) {
+        m_ApiHandler.setMModel(Constants::ApiModel::Security);
+        m_ApiHandler.setMAction(Constants::ApiAction::Change);
+        m_ApiHandler.setRequestBody(changePasswordDto.ToJson(false).dump());
+        m_ApiHandler.Execute(ApiHandler::RequestMethod::PATCH, SLOT(onPasswordChanged(QNetworkReply *)));
+    } else {
+        this->setBusy(false, "Changing password canceled.");
+    }
 }
 
 void PreferenceWidget::onBtnSaveSettingClicked() {
@@ -105,7 +127,24 @@ void PreferenceWidget::onSettingSaved(QNetworkReply *reply)
 
 void PreferenceWidget::onPasswordChanged(QNetworkReply *reply)
 {
+    QEventLoop eventLoop;
+    connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
+    BaseResponse response(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt(),
+                          QString(reply->readAll()).toStdString());
+    reply->deleteLater();
 
+    if(response.ResponseCode() != BaseResponse::Status::HTTP_OK) {
+        this->setBusy(false, QString::fromStdString(response.getResponseData()["message"]));
+    } else {
+        this->setBusy(false, "Ready");
+        QMessageBox messageBox;
+        messageBox.setText("Password updated.");
+        messageBox.setStandardButtons(QMessageBox::StandardButton::Ok);
+        messageBox.setDefaultButton(QMessageBox::StandardButton::Ok);
+        messageBox.exec();
+
+        QApplication::quit();
+    }
 }
 
 void PreferenceWidget::setBusy(bool isBusy, QString message)
