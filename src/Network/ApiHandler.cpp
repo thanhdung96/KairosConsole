@@ -54,6 +54,16 @@ void ApiHandler::setMEntityId(const string &mEntityId) {
     m_EntityId = mEntityId;
 }
 
+void ApiHandler::pushQuery(const string &query)
+{
+    m_UriBuilder.pushQuery(query);
+}
+
+void ApiHandler::clearQuery()
+{
+    m_UriBuilder.clearQuery();
+}
+
 void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
     if(
         find(
@@ -102,6 +112,8 @@ void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
             m_NwManager.get(request);
             break;
     }
+
+    m_UriBuilder.clearQuery();
 }
 
 void ApiHandler::buildPath(bool includeRole) {
@@ -110,8 +122,4 @@ void ApiHandler::buildPath(bool includeRole) {
     m_UriBuilder.pushPath(m_Model);
     m_UriBuilder.pushPath(m_Action);
     m_UriBuilder.pushPath(m_EntityId);
-}
-
-void ApiHandler::buildQuery() {
-    m_UriBuilder.clearQuery();
 }

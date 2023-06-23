@@ -4,42 +4,42 @@
 <context>
     <name>LoginDialog</name>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="26"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="26"/>
         <source>Login To Kairos</source>
         <translation>Connexion à Kairos</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="49"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="49"/>
         <source>Employee ID / Email</source>
         <translation>Identifiant / Email</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="59"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="59"/>
         <source>Password</source>
         <translation>Mot de Passe</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="75"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="75"/>
         <source>Show</source>
         <translation>Afficher</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="101"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="101"/>
         <source>Remember me</source>
         <translation>Se souvenir de moi</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="125"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="125"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="132"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="132"/>
         <source>Login</source>
         <translation>Se connecter</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/security/logindialog.ui" line="143"/>
+        <location filename="../KairosQt/design/Security/logindialog.ui" line="143"/>
         <source>TextLabel</source>
         <translation></translation>
     </message>
@@ -130,82 +130,82 @@
 <context>
     <name>MyProfileWidget</name>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="14"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished">Mon Profil</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="78"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="78"/>
         <source>Personal Information</source>
         <translation type="unfinished">Informations Personnelles</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="124"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="124"/>
         <source>Motor Brand</source>
         <translation type="unfinished">Marque de Moto</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="131"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="131"/>
         <source>Plate Number</source>
         <translation type="unfinished">Numéro De La Plaque</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="138"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="138"/>
         <source>Phone Number</source>
         <translation type="unfinished">Numéro De Téléphone</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="152"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="152"/>
         <source>ID Number</source>
         <translation type="unfinished">Numéro De Passeport Ou CNI</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="162"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="162"/>
         <source>Social Insurrace ID</source>
         <translation type="unfinished">Numéro De Sécurité Sociale</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="178"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="178"/>
         <source>Permanent Address</source>
         <translation type="unfinished">Adresse Permanente</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="188"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="188"/>
         <source>Temporary Address</source>
         <translation type="unfinished">Adresse Temporaire</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="202"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="202"/>
         <source>Nationality</source>
         <translation type="unfinished">Nationalité</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="219"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="219"/>
         <source>Date of Birth</source>
         <translation type="unfinished">Date De Naissance</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="236"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="236"/>
         <source>First Working Date</source>
         <translation type="unfinished">Premier Jour De Travail</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="257"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="257"/>
         <source>Account Information</source>
         <translation type="unfinished">Détails Du Compte</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="281"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="281"/>
         <source>Employee Code</source>
         <translation type="unfinished">ID Employé(e)</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="295"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="295"/>
         <source>Email</source>
         <translation type="unfinished">Email</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/myprofilewidget.ui" line="326"/>
+        <location filename="../KairosQt/design/App/myprofilewidget.ui" line="326"/>
         <source>Save</source>
         <translation type="unfinished">Enregistrer</translation>
     </message>
@@ -213,54 +213,160 @@
 <context>
     <name>PreferenceWidget</name>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="14"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished">Préférence</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="22"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="22"/>
         <source>Application Setting</source>
         <translation type="unfinished">Paramètre D&apos;application</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="33"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="33"/>
         <source>Daily Summary</source>
         <translation type="unfinished">Résumé Quotidien</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="40"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="40"/>
         <source>Weekly Summary</source>
         <translation type="unfinished">Résumé Hebdomadaire</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="47"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="47"/>
         <source>Monthly Summary</source>
         <translation type="unfinished">Résumé Mensuel</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="58"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="58"/>
         <source>Display language</source>
         <translation type="unfinished">Langue D&apos;affichage</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="100"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="100"/>
         <source>Save Setting</source>
         <translation type="unfinished">Enregistrer les Paramètres</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="113"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="113"/>
         <source>Old Password</source>
         <translation type="unfinished">Ancien Mot de Passe</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="127"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="127"/>
         <source>New Password</source>
         <translation type="unfinished">Nouveau Mot de Passe</translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/app/PreferenceWidget.ui" line="156"/>
+        <location filename="../KairosQt/design/App/PreferenceWidget.ui" line="156"/>
         <source>Save Password</source>
         <translation type="unfinished">Enregistre le MdP</translation>
+    </message>
+</context>
+<context>
+    <name>RoleForm</name>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="22"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="42"/>
+        <source>Return to List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="57"/>
+        <source>Role Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="78"/>
+        <source>Maximum leave duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="111"/>
+        <source>Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="119"/>
+        <source>Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="124"/>
+        <source>Employee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="129"/>
+        <source>Part-timer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="134"/>
+        <source>Freelancer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="139"/>
+        <source>Internship</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="153"/>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="182"/>
+        <source>Save</source>
+        <translation type="unfinished">Enregistrer</translation>
+    </message>
+</context>
+<context>
+    <name>RoleListing</name>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="54"/>
+        <source>New Role</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="78"/>
+        <source>Set Role as:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="86"/>
+        <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="91"/>
+        <source>Inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="99"/>
+        <source>or</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="106"/>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

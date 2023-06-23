@@ -49,14 +49,10 @@ string UriBuilder::toString() {
 
     uri.replace(uri.find("$path"), 5, path);
 
-    if(!query.empty()) {
-        uri.replace(uri.find("$query"), 6, query);
-    } else {
-        uri.replace(uri.find("?$query"), 7, "");
-    }
+    uri.replace(uri.find("/$query"), 7, !query.empty() ? query : "");
 
     if(!m_IncludeLastSlash) {
-        uri.replace(uri.find_last_of('/'), 1, "");
+        uri.resize(uri.size() - 1);
     }
 
     return uri;
@@ -156,7 +152,6 @@ string UriBuilder::getQuery() {
     string query;
     queryStream >> query;
     return query;
-
 }
 
 void UriBuilder::pushQuery(const string &query) {

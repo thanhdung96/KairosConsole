@@ -35,7 +35,6 @@ private:
     ApiHandler m_ApiHandler;
     LstLanguage m_LstSupportedLanguages;
 
-
 private:
     void setBusy(bool isBusy, QString message);
     void initialiseUi();

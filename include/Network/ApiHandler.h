@@ -3,6 +3,7 @@
 
 #include "Helper/UriBuilder.h"
 #include <string>
+#include <vector>
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 
@@ -36,6 +37,8 @@ namespace Network {
             void setMAction(const string &Action);
             const string &getMEntityId() const;
             void setMEntityId(const string &EntityId);
+            void pushQuery(const string& query);
+            void clearQuery();
 
         private:
             UriBuilder m_UriBuilder;
@@ -49,7 +52,6 @@ namespace Network {
 
         private:
             void buildPath(bool includeRole);
-            void buildQuery();
     };
 }
 #endif //KAIROSCONSOLE_APIHANDLER_H

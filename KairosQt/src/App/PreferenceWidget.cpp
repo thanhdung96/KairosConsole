@@ -1,4 +1,4 @@
-#include "PreferenceWidget.h"
+#include "App/PreferenceWidget.h"
 #include <QEventLoop>
 #include <QMessageBox>
 #include <string>
