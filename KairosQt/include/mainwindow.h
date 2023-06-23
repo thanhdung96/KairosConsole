@@ -3,10 +3,13 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <vector>
 #include <QNetworkReply>
+#include <QPushButton>
 #include "Network/ApiHandler.h"
-#include "myprofilewidget.h"
-#include "PreferenceWidget.h"
+#include "App/myprofilewidget.h"
+#include "App/PreferenceWidget.h"
+#include "Role/RoleListingWidget.h"
 
 using namespace Network;
 
@@ -28,19 +31,29 @@ private slots:
     void onActionQuitTriggered(bool checked);
     void onActionMyProfileTriggered(bool checked);
     void onActionPreferenceTriggered(bool checked);
+    void onBtnSideTitleClicked();
+    void onBtnSideHolidaysClicked();
+    void onBtnSideLeaveTypesClicked();
+    void onBtnSideEmployeesClicked();
+    void onBtnSideImportClicked();
 
     void onWidgetBusy(QString message);
     void onWidgetReady(QString message);
 
 private:
+    typedef vector<QPushButton*> LstButtons;
+
     Ui::MainWindow *ui;
     ApiHandler m_ApiHandler;
     MyProfileWidget* m_MyProfileWg = nullptr;
     PreferenceWidget* m_PreferenceWg = nullptr;
+    RoleListingWidget* m_RoleListingWg = nullptr;
+    LstButtons m_LstSideBtns;
 
 private:
     void initialiseUI();
     void loadProfile();
     void deleteCurrentWidget();
+    void checkListSideButtons(QPushButton* selectedSideBtn);
 };
 #endif // MAINWINDOW_H

@@ -9,6 +9,28 @@ namespace Network::Constants {
     inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
     inline const string HTTPS_SCHEME = "https";
     inline const string HTTPS_PORT = "443";
+    inline const string BLANK = "";
+
+    class Query {
+        public:
+            inline static const string All = "all";
+            inline static const string Active = "active";
+            inline static const string Inactive = "inactive";
+
+            inline static const string UserQuitted = "quitted";
+            inline static const string UserFired= "fired";
+            inline static const string UserEOC= "eoc";
+
+            inline static const string SummaryThisMonth = "thisMonth";
+            inline static const string SummaryThisYear= "thisYear";
+            inline static const string SummaryLastMonth= "lastMonth";
+            inline static const string SummaryLastYear= "lastYear";
+
+        protected:
+            Query() = default;
+            ~Query() = default;
+
+    };
 
     class ApiModel {
         public:
@@ -22,6 +44,7 @@ namespace Network::Constants {
             inline static const string Process = "process";
             inline static const string Holiday = "holiday";
             inline static const string LeaveType = "leave-types";
+            inline static const string Role = "roles";
 
             inline static const vector<string> ModelWithoutRole = {
                 Security,

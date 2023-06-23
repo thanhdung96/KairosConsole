@@ -63,7 +63,7 @@ namespace Network::Helper{
             bool m_IncludePortNumber;
             bool m_IncludeLastSlash;
 
-            const string URI_TEMPLATE= "$scheme://$username:$password@$host:$port/$path?$query";
+            const string URI_TEMPLATE= "$scheme://$username:$password@$host:$port/$path/$query";
             const string PATH_SEPARATOR = "/";
             const string QUERY_AMPERSAND_SEPARATOR = "&";
             const string QUERY_SEMICOLON_SEPARATOR = ";";
