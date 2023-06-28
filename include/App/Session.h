@@ -4,7 +4,7 @@
 #include <string>
 
 namespace App {
-    using namespace std;
+using std::string;
 
     class Session
     {

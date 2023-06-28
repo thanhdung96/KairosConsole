@@ -7,8 +7,10 @@
 #include "Network/Constants/ApiConstants.h"
 #include "Network/Helper/BaseResponse.h"
 #include "ui_PreferenceWidget.h"
-using namespace DTO::App;
-using namespace DTO::Security;
+
+using DTO::App::SettingDto;
+using DTO::Security::ChangePasswordDto;
+using Network::Helper::BaseResponse;
 
 PreferenceWidget::PreferenceWidget(QWidget *parent) :
     QWidget(parent),

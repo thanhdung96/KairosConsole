@@ -6,13 +6,14 @@
 
 namespace DTO::Security
 {
-    using namespace std;
+using std::string;
+
     class ActivateDto : public BaseSecurityDto
     {
         public:
             ActivateDto(string Username, string Hashcode);
-            ActivateDto();
-            ~ActivateDto() override;
+            ActivateDto() = default;
+            ~ActivateDto() override = default;
 
             string GetHashcode() { return m_Hashcode; }
             void SetHashcode(string val) { m_Hashcode = val; }

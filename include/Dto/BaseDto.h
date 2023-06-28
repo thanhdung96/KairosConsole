@@ -1,13 +1,10 @@
 #ifndef KAIROSCONSOLE_BASEDTO_H
 #define KAIROSCONSOLE_BASEDTO_H
 
-#include <string>
 #include "Network/Helper/json.hpp"
 
 namespace DTO {
-    using json = nlohmann::json;
-    using namespace std;
-
+using json = nlohmann::json;
     class BaseDto {
         public:
             virtual void FromJson(const json& jsonObject);

@@ -6,7 +6,8 @@
 #include "Dto/Management/RoleDto.h"
 #include "App/UserRole.h"
 
-using namespace DTO::Management;
+using DTO::Management::RoleDto;
+using Network::Helper::BaseResponse;
 
 RoleForm::RoleForm(QWidget *parent, const string& roleId) :
     QWidget(parent),

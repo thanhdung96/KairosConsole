@@ -3,9 +3,9 @@
 
 #include <string>
 #include <map>
-using namespace std;
 
 namespace App {
+using std::map, std::string;
 typedef map<string, string> UserRoleMap;
 
     class UserRole

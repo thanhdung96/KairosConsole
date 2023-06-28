@@ -9,7 +9,7 @@
 #include <QString>
 
 using json = nlohmann::json;
-using namespace App;
+using Network::Helper::BaseResponse;
 
 MyProfileWidget::MyProfileWidget(QWidget *parent) :
     QWidget(parent),

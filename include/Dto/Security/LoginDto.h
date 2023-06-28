@@ -7,14 +7,14 @@
 
 namespace DTO::Security
 {
-    using namespace std;
-    using json = nlohmann::json;
+using std::string;
+using json = nlohmann::json;
 
     class LoginDto: public BaseSecurityDto
     {
         public:
             LoginDto(string Username, string Password);
-            LoginDto();
+            LoginDto() = default;
             ~LoginDto() override = default;
 
             string GetPassword() { return m_Password; }

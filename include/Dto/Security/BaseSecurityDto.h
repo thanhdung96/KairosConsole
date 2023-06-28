@@ -7,14 +7,14 @@
 
 namespace DTO::Security
 {
-    using namespace std;
-    using json = nlohmann::json;
+using std::string;
+using json = nlohmann::json;
 
     class BaseSecurityDto: BaseDto
     {
         public:
             explicit BaseSecurityDto(string Username);
-            virtual ~BaseSecurityDto();
+            virtual ~BaseSecurityDto() = default;
 
             string GetUsername() { return m_Username; }
             void SetUsername(string val) { m_Username = val; }

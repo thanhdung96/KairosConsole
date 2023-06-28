@@ -5,100 +5,102 @@
 #include "Network/Constants/ApiConstants.h"
 #include <exception>
 #include <algorithm>
-using namespace Network;
 
-ApiHandler::ApiHandler() {
-    m_UriBuilder.setScheme(Constants::HTTPS_SCHEME);
-    m_UriBuilder.setMIncludePortNumber(false);
-    m_UriBuilder.setMIncludeLastSlash(false);
-}
+namespace Network {
+using Network::Helper::BaseRequest;
 
-const string &ApiHandler::getMDomain() const {
-    return m_Domain;
-}
-
-void ApiHandler::setMDomain(const string &mDomain) {
-    m_UriBuilder.setHost(mDomain);
-    m_Domain = mDomain;
-}
-
-const string &ApiHandler::getRequestBody() const {
-    return m_requestBody;
-}
-
-void ApiHandler::setRequestBody(const string &requestBody) {
-    ApiHandler::m_requestBody = requestBody;
-}
-
-const string &ApiHandler::getMModel() const {
-    return m_Model;
-}
-
-void ApiHandler::setMModel(const string &mModel) {
-    m_Model = mModel;
-}
-
-const string &ApiHandler::getMAction() const {
-    return m_Action;
-}
-
-void ApiHandler::setMAction(const string &mAction) {
-    m_Action = mAction;
-}
-
-const string &ApiHandler::getMEntityId() const {
-    return m_EntityId;
-}
-
-void ApiHandler::setMEntityId(const string &mEntityId) {
-    m_EntityId = mEntityId;
-}
-
-void ApiHandler::pushQuery(const string &query)
-{
-    m_UriBuilder.pushQuery(query);
-}
-
-void ApiHandler::clearQuery()
-{
-    m_UriBuilder.clearQuery();
-}
-
-void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
-    if(
-        find(
-            Constants::ApiModel::ModelWithoutRole.begin(),
-            Constants::ApiModel::ModelWithoutRole.end(),
-            m_Model
-        ) != Constants::ApiModel::ModelWithoutRole.end()
-    ) {
-        this->buildPath(false);
-    } else {
-        this->buildPath(true);
+    ApiHandler::ApiHandler() {
+        m_UriBuilder.setScheme(Constants::HTTPS_SCHEME);
+        m_UriBuilder.setMIncludePortNumber(false);
+        m_UriBuilder.setMIncludeLastSlash(false);
     }
 
-    QNetworkRequest request = BaseRequest::getBaseNetworkRequest(m_UriBuilder.toString());
-    QByteArray postData = QByteArray::fromStdString(m_requestBody);
-    m_NwManager.setParent(this);
+    const string &ApiHandler::getMDomain() const {
+        return m_Domain;
+    }
 
-    if(!m_LastReceiverSlot.empty()) {
-        disconnect(
+    void ApiHandler::setMDomain(const string &mDomain) {
+        m_UriBuilder.setHost(mDomain);
+        m_Domain = mDomain;
+    }
+
+    const string &ApiHandler::getRequestBody() const {
+        return m_requestBody;
+    }
+
+    void ApiHandler::setRequestBody(const string &requestBody) {
+        ApiHandler::m_requestBody = requestBody;
+    }
+
+    const string &ApiHandler::getMModel() const {
+        return m_Model;
+    }
+
+    void ApiHandler::setMModel(const string &mModel) {
+        m_Model = mModel;
+    }
+
+    const string &ApiHandler::getMAction() const {
+        return m_Action;
+    }
+
+    void ApiHandler::setMAction(const string &mAction) {
+        m_Action = mAction;
+    }
+
+    const string &ApiHandler::getMEntityId() const {
+        return m_EntityId;
+    }
+
+    void ApiHandler::setMEntityId(const string &mEntityId) {
+        m_EntityId = mEntityId;
+    }
+
+    void ApiHandler::pushQuery(const string &query)
+    {
+        m_UriBuilder.pushQuery(query);
+    }
+
+    void ApiHandler::clearQuery()
+    {
+        m_UriBuilder.clearQuery();
+    }
+
+    void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
+        if(
+            find(
+                Constants::ApiModel::ModelWithoutRole.begin(),
+                Constants::ApiModel::ModelWithoutRole.end(),
+                m_Model
+                ) != Constants::ApiModel::ModelWithoutRole.end()
+            ) {
+            this->buildPath(false);
+        } else {
+            this->buildPath(true);
+        }
+
+        QNetworkRequest request = BaseRequest::getBaseNetworkRequest(m_UriBuilder.toString());
+        QByteArray postData = QByteArray::fromStdString(m_requestBody);
+        m_NwManager.setParent(this);
+
+        if(!m_LastReceiverSlot.empty()) {
+            disconnect(
+                &m_NwManager,
+                SIGNAL(finished(QNetworkReply*)),
+                this->parent(),
+                m_LastReceiverSlot.c_str()
+                );
+        }
+        connect(
             &m_NwManager,
             SIGNAL(finished(QNetworkReply*)),
             this->parent(),
-            m_LastReceiverSlot.c_str()
-        );
-    }
-    connect(
-        &m_NwManager,
-        SIGNAL(finished(QNetworkReply*)),
-        this->parent(),
-        receiverSlot.c_str()
-    );
-    m_LastReceiverSlot = receiverSlot;
+            receiverSlot.c_str()
+            );
+        m_LastReceiverSlot = receiverSlot;
 
-    // default method is get
-    switch (requestMethod) {
+        // default method is get
+        switch (requestMethod) {
         case RequestMethod::POST:
             m_NwManager.post(request, postData);
             break;
@@ -111,15 +113,16 @@ void ApiHandler::Execute(RequestMethod requestMethod, string receiverSlot) {
         default:
             m_NwManager.get(request);
             break;
+        }
+
+        m_UriBuilder.clearQuery();
     }
 
-    m_UriBuilder.clearQuery();
-}
-
-void ApiHandler::buildPath(bool includeRole) {
-    m_UriBuilder.clearPath();
-    m_UriBuilder.pushPath(includeRole ? App::Session::getRole() : "");
-    m_UriBuilder.pushPath(m_Model);
-    m_UriBuilder.pushPath(m_Action);
-    m_UriBuilder.pushPath(m_EntityId);
+    void ApiHandler::buildPath(bool includeRole) {
+        m_UriBuilder.clearPath();
+        m_UriBuilder.pushPath(includeRole ? App::Session::getRole() : "");
+        m_UriBuilder.pushPath(m_Model);
+        m_UriBuilder.pushPath(m_Action);
+        m_UriBuilder.pushPath(m_EntityId);
+    }
 }

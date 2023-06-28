@@ -5,7 +5,7 @@
 #include <string>
 
 namespace App {
-using namespace std;
+using std::map, std::string;
 typedef map<int, string> StatusMap;
 
     class UserStatus

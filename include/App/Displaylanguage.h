@@ -6,10 +6,10 @@
 #include <string>
 
 namespace App {
-    using namespace std;
-    typedef map<string, string> LstLanguageMapping;
-    typedef LstLanguageMapping::iterator LanguageMappingIterator;
-    typedef vector<string> LstLanguage;
+using std::map, std::string, std::vector;
+typedef map<string, string> LstLanguageMapping;
+typedef LstLanguageMapping::iterator LanguageMappingIterator;
+typedef vector<string> LstLanguage;
 
     class DisplayLanguage
     {

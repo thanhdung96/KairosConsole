@@ -1,12 +1,12 @@
 #include "App/Displaylanguage.h"
-using namespace App;
 
-string DisplayLanguage::resolve(const string &key, const ResolveType &resolveType = ResolveType::FromCode)
-{
-    initList();
+namespace App {
+    string DisplayLanguage::resolve(const string &key, const ResolveType &resolveType = ResolveType::FromCode)
+    {
+        initList();
 
-    string retData;
-    switch (resolveType) {
+        string retData;
+        switch (resolveType) {
         case ResolveType::FromCode:
             retData = DisplayLanguage::m_LstSupportedLanguages.find(key)->second;
             break;
@@ -15,7 +15,7 @@ string DisplayLanguage::resolve(const string &key, const ResolveType &resolveTyp
                 LanguageMappingIterator it = DisplayLanguage::m_LstSupportedLanguages.begin();
                 it != DisplayLanguage::m_LstSupportedLanguages.end();
                 it++
-            ) {
+                ) {
                 if(it->second == key) {
                     retData = it->first;
                     break;
@@ -23,32 +23,33 @@ string DisplayLanguage::resolve(const string &key, const ResolveType &resolveTyp
             }
         default:
             break;
+        }
+
+        return retData;
     }
 
-    return retData;
-}
+    const LstLanguage DisplayLanguage::getAllLanguages()
+    {
+        initList();
+        LstLanguage lstLanguages;
 
-const LstLanguage DisplayLanguage::getAllLanguages()
-{
-    initList();
-    LstLanguage lstLanguages;
-
-    for(
-        LanguageMappingIterator it = DisplayLanguage::m_LstSupportedLanguages.begin();
-        it != DisplayLanguage::m_LstSupportedLanguages.end();
-        it++
-    ) {
+        for(
+            LanguageMappingIterator it = DisplayLanguage::m_LstSupportedLanguages.begin();
+            it != DisplayLanguage::m_LstSupportedLanguages.end();
+            it++
+            ) {
             lstLanguages.emplace_back(it->second);
+        }
+
+        return lstLanguages;
     }
 
-   return lstLanguages;
-}
-
-void DisplayLanguage::initList()
-{
-    if(DisplayLanguage::m_LstSupportedLanguages.empty()) {
-        DisplayLanguage::m_LstSupportedLanguages["vi"] = "Tiếng Việt";
-        DisplayLanguage::m_LstSupportedLanguages["en"] = "English";
-        DisplayLanguage::m_LstSupportedLanguages["fr"] = "Français";
+    void DisplayLanguage::initList()
+    {
+        if(DisplayLanguage::m_LstSupportedLanguages.empty()) {
+            DisplayLanguage::m_LstSupportedLanguages["vi"] = "Tiếng Việt";
+            DisplayLanguage::m_LstSupportedLanguages["en"] = "English";
+            DisplayLanguage::m_LstSupportedLanguages["fr"] = "Français";
+        }
     }
 }

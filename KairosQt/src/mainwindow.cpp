@@ -11,6 +11,8 @@
 #include "App/Session.h"
 #include "App/UserRole.h"
 
+using Network::Helper::BaseResponse;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
