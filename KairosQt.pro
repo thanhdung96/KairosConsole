@@ -17,6 +17,8 @@ PRECOMPILED_HEADER = include/Network/Helper/json.hpp
 SOURCES += \
     KairosQt/src/App/PreferenceWidget.cpp \
     KairosQt/src/App/myprofilewidget.cpp \
+    KairosQt/src/AvailableType/AvailableTypeForm.cpp \
+    KairosQt/src/AvailableType/AvailableTypeListingWidget.cpp \
     KairosQt/src/Role/RoleForm.cpp \
     KairosQt/src/Role/RoleListingWidget.cpp \
     KairosQt/src/Security/logindialog.cpp \
@@ -28,12 +30,15 @@ SOURCES += \
     src/App/UserStatus.cpp \
     src/Dto/App/ProfileDto.cpp \
     src/Dto/App/SettingDto.cpp \
+    src/Dto/App/StatusDto.cpp \
     src/Dto/BaseDto.cpp \
+    src/Dto/Management/AvailableTypeDto.cpp \
     src/Dto/Management/RoleDto.cpp \
     src/Dto/Security/ActivateDto.cpp \
     src/Dto/Security/BaseSecurityDto.cpp \
     src/Dto/Security/ChangePasswordDto.cpp \
     src/Dto/Security/LoginDto.cpp \
+    src/Model/AvailableTypeModel.cpp \
     src/Model/RoleModel.cpp \
     src/Network/ApiHandler.cpp \
     src/Network/Helper/BaseRequest.cpp \
@@ -43,6 +48,8 @@ SOURCES += \
 HEADERS += \
     KairosQt/include/App/PreferenceWidget.h \
     KairosQt/include/App/myprofilewidget.h \
+    KairosQt/include/AvailableType/AvailableTypeForm.h \
+    KairosQt/include/AvailableType/AvailableTypeListingWidget.h \
     KairosQt/include/Role/RoleForm.h \
     KairosQt/include/Role/RoleListingWidget.h \
     KairosQt/include/Security/logindialog.h \
@@ -53,12 +60,15 @@ HEADERS += \
     include/App/UserStatus.h \
     include/Dto/App/ProfileDto.h \
     include/Dto/App/SettingDto.h \
+    include/Dto/App/StatusDto.h \
     include/Dto/BaseDto.h \
+    include/Dto/Management/AvailableTypeDto.h \
     include/Dto/Management/RoleDto.h \
     include/Dto/Security/ActivateDto.h \
     include/Dto/Security/BaseSecurityDto.h \
     include/Dto/Security/ChangePasswordDto.h \
     include/Dto/Security/LoginDto.h \
+    include/Model/AvailableTypeModel.h \
     include/Model/RoleModel.h \
     include/Network/ApiHandler.h \
     include/Network/Constants/ApiConstants.h \
@@ -69,6 +79,8 @@ HEADERS += \
 FORMS += \
     KairosQt/design/App/PreferenceWidget.ui \
     KairosQt/design/App/myprofilewidget.ui \
+    KairosQt/design/AvailableType/AvailableTypeForm.ui \
+    KairosQt/design/AvailableType/AvailableTypeListingWidget.ui \
     KairosQt/design/Role/RoleForm.ui \
     KairosQt/design/Role/RoleListingWidget.ui \
     KairosQt/design/Security/logindialog.ui \

@@ -32,13 +32,16 @@ MainWindow::~MainWindow()
 {
 
     if(m_MyProfileWg != nullptr) {
-        delete m_MyProfileWg;
+        m_MyProfileWg->deleteLater();
     }
     if(m_PreferenceWg != nullptr) {
-        delete m_PreferenceWg;
+        m_PreferenceWg->deleteLater();
     }
     if(m_RoleListingWg != nullptr) {
-        delete m_RoleListingWg;
+        m_RoleListingWg->deleteLater();
+    }
+    if(m_TypeListingWidget != nullptr) {
+        m_TypeListingWidget->deleteLater();
     }
     delete ui;
 }
@@ -113,7 +116,15 @@ void MainWindow::onBtnSideHolidaysClicked()
 
 void MainWindow::onBtnSideLeaveTypesClicked()
 {
-    this->checkListSideButtons(ui->btnSideLeaveTypes);
+    if(m_TypeListingWidget == nullptr) {
+        this->deleteCurrentWidget();
+        this->checkListSideButtons(ui->btnSideLeaveTypes);
+        m_TypeListingWidget = new AvailableTypeListingWidget(this);
+        ui->swMain->addWidget(m_TypeListingWidget);
+        this->setWindowTitle("Roles");
+        connect(m_TypeListingWidget, SIGNAL(busy(QString)), this, SLOT(onWidgetBusy(QString)));
+        connect(m_TypeListingWidget, SIGNAL(ready(QString)), this, SLOT(onWidgetReady(QString)));
+    }
 }
 
 void MainWindow::onBtnSideEmployeesClicked()
@@ -180,6 +191,9 @@ void MainWindow::deleteCurrentWidget()
     }
     if(m_RoleListingWg != nullptr) {
         m_RoleListingWg = nullptr;
+    }
+    if(m_TypeListingWidget != nullptr) {
+        m_TypeListingWidget = nullptr;
     }
 }
 

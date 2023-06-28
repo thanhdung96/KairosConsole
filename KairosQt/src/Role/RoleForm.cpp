@@ -79,12 +79,10 @@ void RoleForm::onBtnSaveClicked()
     m_ApiHandler.setMModel(Constants::ApiModel::Role);
     m_ApiHandler.setMAction("");
     if(m_RoleId.empty()) {
-        roleDto.setActive(true);
-
         m_ApiHandler.setRequestBody(roleDto.ToJson(true).dump());
         m_ApiHandler.Execute(ApiHandler::RequestMethod::POST, SLOT(onRoleSaved(QNetworkReply*)));
     } else {
-        roleDto.setActive(true);
+        roleDto.setActive(ui->cbxActive->isChecked());
 
         m_ApiHandler.pushQuery(m_RoleId);
         m_ApiHandler.setRequestBody(roleDto.ToJson(true).dump());
@@ -122,7 +120,7 @@ void RoleForm::loadRoleDetail(const string &roleId)
     m_ApiHandler.Execute(
         ApiHandler::RequestMethod::GET,
         SLOT(onFetchRoleDetail(QNetworkReply *))
-        );
+    );
 }
 
 void RoleForm::setBusy(bool isBusy, QString message)

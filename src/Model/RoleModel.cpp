@@ -1,8 +1,6 @@
 #include "Model/RoleModel.h"
 
 namespace Model {
-using DTO::Management::RoleDto;
-
     RoleModel::RoleModel(QObject *parent) : QAbstractItemModel(parent)
     {
 
@@ -10,7 +8,6 @@ using DTO::Management::RoleDto;
 
     QVariant RoleModel::headerData(int section, Qt::Orientation orientation, int role) const
     {
-        // FIXME: Implement me!
         if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
             if(section == 0) {
                 return QString("Id");
@@ -99,7 +96,7 @@ using DTO::Management::RoleDto;
         return true;
     }
 
-    void RoleModel::populateData(json lstRoleDto)
+    void RoleModel::populateData(const json& lstRoleDto)
     {
         m_LstRoles.clear();
         for(size_t i = 0; i < lstRoleDto.size(); i += 1) {
