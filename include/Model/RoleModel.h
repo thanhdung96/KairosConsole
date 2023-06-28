@@ -8,6 +8,7 @@
 
 namespace Model {
 using json = nlohmann::json;
+using DTO::Management::RoleDto;
 
     class RoleModel : public QAbstractItemModel
     {
@@ -36,10 +37,10 @@ using json = nlohmann::json;
             bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
             bool removeColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
 
-            void populateData(json lstRoleDto);
+            void populateData(const json& lstRoleDto);
 
         private:
-            QList<DTO::Management::RoleDto> m_LstRoles;
+            QList<RoleDto> m_LstRoles;
     };
 };
 

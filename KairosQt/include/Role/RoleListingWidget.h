@@ -30,12 +30,15 @@ private:
     void setBusy(bool isBusy, QString message);
     void initialiseUi();
     void loadRoles(const string& filter = Constants::Query::All);
+    void applyFilter(const string& currentText);
 
 private slots:
     void onFetchRoles(QNetworkReply* reply);
     void onBtnNewRoleClicked();
     void onBtnEditRoleClicked();
     void onCbxFilterTextChanged(const QString&);
+    void onCbxStatusTextChanged(const QString&);
+    void onRoleStatusChanged(QNetworkReply* reply);
 
     void onRoleFormReturned(bool withFormSubmitSuccess, string message);
     void onRoleFormBusy(const string& message);

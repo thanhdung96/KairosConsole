@@ -1,0 +1,40 @@
+#ifndef AVAILABLETYPEMODEL_H
+#define AVAILABLETYPEMODEL_H
+
+#include <QAbstractItemModel>
+#include <QList>
+#include "Dto/Management/AvailableTypeDto.h"
+#include "Network/Helper/json.hpp"
+
+namespace Model {
+using json = nlohmann::json;
+using DTO::Management::AvailableTypeDto;
+
+    class AvailableTypeModel : public QAbstractItemModel
+    {
+        Q_OBJECT
+
+    public:
+        explicit AvailableTypeModel(QObject *parent = nullptr);
+
+        // Header:
+        QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
+
+        // Basic functionality:
+        QModelIndex index(int row, int column,
+                          const QModelIndex &parent = QModelIndex()) const override;
+        QModelIndex parent(const QModelIndex &index) const override;
+
+        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+        int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+
+        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+        void populateData(const json& lstAvailableType);
+
+        private:
+            QList<AvailableTypeDto> m_LstAvailableType;
+    };
+}
+
+#endif // AVAILABLETYPEMODEL_H

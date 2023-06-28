@@ -10,6 +10,7 @@
 #include "App/myprofilewidget.h"
 #include "App/PreferenceWidget.h"
 #include "Role/RoleListingWidget.h"
+#include "AvailableType/AvailableTypeListingWidget.h"
 
 using namespace Network;
 
@@ -48,6 +49,7 @@ private:
     MyProfileWidget* m_MyProfileWg = nullptr;
     PreferenceWidget* m_PreferenceWg = nullptr;
     RoleListingWidget* m_RoleListingWg = nullptr;
+    AvailableTypeListingWidget* m_TypeListingWidget = nullptr;
     LstButtons m_LstSideBtns;
 
 private:
