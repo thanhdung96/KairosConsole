@@ -6,8 +6,9 @@
 
 namespace DTO::Security
 {
-    using namespace std;
-    class ChangePasswordDto : public BaseSecurityDto
+using std::string;
+
+class ChangePasswordDto : public BaseSecurityDto
     {
         public:
             ChangePasswordDto();

@@ -327,6 +327,11 @@
     </message>
     <message>
         <location filename="../KairosQt/design/Role/RoleForm.ui" line="182"/>
+        <source>Is Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleForm.ui" line="206"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -339,32 +344,39 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="54"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="73"/>
         <source>New Role</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="78"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="97"/>
         <source>Set Role as:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="86"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="47"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="105"/>
         <source>Active</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="91"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="42"/>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="52"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="110"/>
         <source>Inactive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="99"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="118"/>
         <source>or</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="106"/>
+        <location filename="../KairosQt/design/Role/RoleListingWidget.ui" line="125"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>

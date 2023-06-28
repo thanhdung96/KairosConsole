@@ -7,8 +7,8 @@
 #include "Network/Helper/json.hpp"
 
 namespace Model {
-using namespace DTO::Management;
 using json = nlohmann::json;
+
     class RoleModel : public QAbstractItemModel
     {
         Q_OBJECT
@@ -39,7 +39,7 @@ using json = nlohmann::json;
             void populateData(json lstRoleDto);
 
         private:
-            QList<RoleDto> m_LstRoles;
+            QList<DTO::Management::RoleDto> m_LstRoles;
     };
 };
 

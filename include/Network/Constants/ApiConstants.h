@@ -3,10 +3,11 @@
 
 #include <string>
 #include <vector>
-using namespace std;
 
 namespace Network::Constants {
-    inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
+using std::string, std::vector;
+
+inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
     inline const string HTTPS_SCHEME = "https";
     inline const string HTTPS_PORT = "443";
     inline const string BLANK = "";

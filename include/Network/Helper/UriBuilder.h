@@ -7,7 +7,7 @@
 #include <sstream>
 
 namespace Network::Helper{
-    using namespace std;
+using std::string, std::vector, std::map, std::pair;
 
     class UriBuilder {
         public:

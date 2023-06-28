@@ -6,8 +6,8 @@
 #include "Network/Helper/json.hpp"
 
 namespace DTO::App {
+using std::string;
 using json = nlohmann::json;
-using namespace std;
 
     class SettingDto: BaseDto
     {

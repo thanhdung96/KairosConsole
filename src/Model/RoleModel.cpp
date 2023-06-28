@@ -1,6 +1,8 @@
 #include "Model/RoleModel.h"
 
 namespace Model {
+using DTO::Management::RoleDto;
+
     RoleModel::RoleModel(QObject *parent) : QAbstractItemModel(parent)
     {
 

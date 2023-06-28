@@ -8,8 +8,7 @@
 #include <QNetworkAccessManager>
 
 namespace Network {
-    using namespace std;
-    using namespace Network::Helper;
+using std::string;
 
     class ApiHandler: public QObject {
         Q_OBJECT
@@ -41,7 +40,7 @@ namespace Network {
             void clearQuery();
 
         private:
-            UriBuilder m_UriBuilder;
+            Network::Helper::UriBuilder m_UriBuilder;
             string m_Domain;
             string m_Model;
             string m_Action;

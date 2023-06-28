@@ -8,7 +8,7 @@
 
 namespace DTO::Management {
 using json = nlohmann::json;
-using namespace std;
+using std::string;
 
     class RoleDto : DTO::BaseDto
     {

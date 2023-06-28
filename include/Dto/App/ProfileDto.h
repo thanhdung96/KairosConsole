@@ -5,13 +5,13 @@
 #include "Network/Helper/json.hpp"
 
 namespace DTO::App {
-using namespace std;
+using std::string;
 using json = nlohmann::json;
 
     class ProfileDto
     {
         public:
-            ProfileDto();
+            ProfileDto() = default;
 
             string getLastName() const;
             void setLastName(const string &newLastName);

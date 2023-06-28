@@ -6,8 +6,8 @@
 
 namespace Network::Helper
 {
-    using namespace std;
-    using json = nlohmann::json;
+using std::string;
+using json = nlohmann::json;
 
     class BaseResponse
     {

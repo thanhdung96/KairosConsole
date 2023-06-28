@@ -3,6 +3,8 @@
 #include "Network/Helper/BaseResponse.h"
 #include <QEventLoop>
 
+using Network::Helper::BaseResponse;
+
 RoleListingWidget::RoleListingWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RoleListing)

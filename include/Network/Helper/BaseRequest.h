@@ -5,7 +5,7 @@
 #include <QNetworkRequest>
 
 namespace Network::Helper {
-    using namespace std;
+using std::string;
 
     class BaseRequest {
         public:
