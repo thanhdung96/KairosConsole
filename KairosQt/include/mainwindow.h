@@ -6,11 +6,11 @@
 #include <vector>
 #include <QNetworkReply>
 #include <QPushButton>
-#include "Network/ApiHandler.h"
 #include "App/myprofilewidget.h"
 #include "App/PreferenceWidget.h"
 #include "Role/RoleListingWidget.h"
 #include "AvailableType/AvailableTypeListingWidget.h"
+#include "Holiday/HolidayListingWidget.h"
 
 using namespace Network;
 
@@ -50,6 +50,7 @@ private:
     PreferenceWidget* m_PreferenceWg = nullptr;
     RoleListingWidget* m_RoleListingWg = nullptr;
     AvailableTypeListingWidget* m_TypeListingWidget = nullptr;
+    HolidayListingWidget* m_HolidayListingWidget = nullptr;
     LstButtons m_LstSideBtns;
 
 private:

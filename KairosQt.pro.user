@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 10.0.1, 2023-06-27T09:42:48. -->
+<!-- Written by QtCreator 10.0.1, 2023-07-06T20:26:42. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -80,9 +80,9 @@
     <value type="QString" key="ClangTools.DiagnosticConfig">Builtin.DefaultTidyAndClazy</value>
     <value type="int" key="ClangTools.ParallelJobs">2</value>
     <valuelist type="QVariantList" key="ClangTools.SelectedDirs">
-     <value type="QString">/home/thanhdung/Documents/KairosConsole/src</value>
-     <value type="QString">/home/thanhdung/Documents/KairosConsole/KairosQt</value>
      <value type="QString">/home/thanhdung/Documents/KairosConsole/include</value>
+     <value type="QString">/home/thanhdung/Documents/KairosConsole/KairosQt</value>
+     <value type="QString">/home/thanhdung/Documents/KairosConsole/src</value>
     </valuelist>
     <valuelist type="QVariantList" key="ClangTools.SelectedFiles">
      <value type="QString">/home/thanhdung/Documents/KairosConsole/main.cpp</value>

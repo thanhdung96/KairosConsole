@@ -2,6 +2,296 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>AvailableTypeForm</name>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="22"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="42"/>
+        <source>Return to List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="55"/>
+        <source>Type Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="72"/>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="89"/>
+        <source>Required Files Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="110"/>
+        <source>Maximum Duration Allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="120"/>
+        <source>Leave Balance Deduction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="127"/>
+        <source>Requires Attachments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="134"/>
+        <source>Unpaid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="160"/>
+        <source>Is Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeForm.ui" line="184"/>
+        <source>Save Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AvailableTypeListingWidget</name>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="39"/>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="44"/>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="102"/>
+        <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="49"/>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="107"/>
+        <source>Inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="70"/>
+        <source>New Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="94"/>
+        <source>Set Type as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="115"/>
+        <source>or</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/AvailableType/AvailableTypeListingWidget.ui" line="122"/>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HolidayBatchForm</name>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayBatchForm.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayBatchForm.ui" line="22"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayBatchForm.ui" line="42"/>
+        <source>Return to List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayBatchForm.ui" line="79"/>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayBatchForm.ui" line="86"/>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayBatchForm.ui" line="93"/>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayBatchForm.ui" line="140"/>
+        <source>Save</source>
+        <translation type="unfinished">Save</translation>
+    </message>
+</context>
+<context>
+    <name>HolidayForm</name>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="22"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="42"/>
+        <source>Return to List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="55"/>
+        <source>Start Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="69"/>
+        <source>End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="83"/>
+        <source>Year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="108"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="129"/>
+        <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="136"/>
+        <source>Recurrent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayForm.ui" line="162"/>
+        <source>Save</source>
+        <translation type="unfinished">Save</translation>
+    </message>
+</context>
+<context>
+    <name>HolidayListingWidget</name>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="39"/>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="44"/>
+        <source>This year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="49"/>
+        <source>Last year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="70"/>
+        <source>New Batch Holidays</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="77"/>
+        <source>New Holiday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="101"/>
+        <source>Set Holiday as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="109"/>
+        <source>Active</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="114"/>
+        <source>Inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="122"/>
+        <source>or</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayListingWidget.ui" line="129"/>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HolidayRowForm</name>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayRowForm.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayRowForm.ui" line="79"/>
+        <source>Start Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayRowForm.ui" line="99"/>
+        <source>End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayRowForm.ui" line="111"/>
+        <source>Recurrent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayRowForm.ui" line="126"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../KairosQt/design/Holiday/HolidayRowForm.ui" line="158"/>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LoginDialog</name>
     <message>
         <location filename="../KairosQt/design/Security/logindialog.ui" line="26"/>

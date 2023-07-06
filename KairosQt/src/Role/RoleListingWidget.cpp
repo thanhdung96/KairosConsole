@@ -106,7 +106,6 @@ void RoleListingWidget::onBtnEditRoleClicked()
     // id column is hidden
     QVariant value = index.sibling(index.row(), 0).data();
 
-
     if(value.isValid()) {
         m_RoleForm = new RoleForm(this, value.toString().toStdString());
         connect(m_RoleForm, SIGNAL(RoleFormReturned(bool,string)), this, SLOT(onRoleFormReturned(bool,string)));
