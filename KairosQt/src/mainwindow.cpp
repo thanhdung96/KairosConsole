@@ -43,6 +43,10 @@ MainWindow::~MainWindow()
     if(m_TypeListingWidget != nullptr) {
         m_TypeListingWidget->deleteLater();
     }
+    if(m_HolidayListingWidget != nullptr) {
+        m_HolidayListingWidget->deleteLater();
+    }
+
     delete ui;
 }
 
@@ -111,7 +115,15 @@ void MainWindow::onBtnSideTitleClicked()
 
 void MainWindow::onBtnSideHolidaysClicked()
 {
-    this->checkListSideButtons(ui->btnSideHolidays);
+    if(m_HolidayListingWidget == nullptr) {
+        this->deleteCurrentWidget();
+        this->checkListSideButtons(ui->btnSideHolidays);
+        m_HolidayListingWidget = new HolidayListingWidget(this);
+        ui->swMain->addWidget(m_HolidayListingWidget);
+        this->setWindowTitle("Holiday");
+        connect(m_HolidayListingWidget, SIGNAL(busy(QString)), this, SLOT(onWidgetBusy(QString)));
+        connect(m_HolidayListingWidget, SIGNAL(ready(QString)), this, SLOT(onWidgetReady(QString)));
+    }
 }
 
 void MainWindow::onBtnSideLeaveTypesClicked()
@@ -195,6 +207,10 @@ void MainWindow::deleteCurrentWidget()
     if(m_TypeListingWidget != nullptr) {
         m_TypeListingWidget = nullptr;
     }
+    if(m_HolidayListingWidget != nullptr) {
+        m_HolidayListingWidget = nullptr;
+    }
+
 }
 
 void MainWindow::checkListSideButtons(QPushButton* selectedSideBtn)

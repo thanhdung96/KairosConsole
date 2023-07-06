@@ -4,8 +4,7 @@
 #include <string>
 #include "Network/Helper/json.hpp"
 
-namespace Network::Helper
-{
+namespace Network::Helper {
 using std::string;
 using json = nlohmann::json;
 

@@ -5,12 +5,13 @@
 #include <vector>
 
 namespace Network::Constants {
-using std::string, std::vector;
+using std::string;
+using std::vector;
 
-inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
+    inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
     inline const string HTTPS_SCHEME = "https";
     inline const string HTTPS_PORT = "443";
-    inline const string BLANK = "";
+    inline const string BLANK = string();
 
     class Query {
         public:
@@ -23,9 +24,11 @@ inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
             inline static const string UserEOC= "eoc";
 
             inline static const string SummaryThisMonth = "thisMonth";
-            inline static const string SummaryThisYear= "thisYear";
-            inline static const string SummaryLastMonth= "lastMonth";
-            inline static const string SummaryLastYear= "lastYear";
+            inline static const string SummaryThisYear = "thisYear";
+            inline static const string SummaryLastMonth = "lastMonth";
+            inline static const string SummaryLastYear = "lastYear";
+
+            inline static const string Current = "current";
 
         protected:
             Query() = default;
@@ -43,7 +46,7 @@ inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
             inline static const string Contact = "contacts";
             inline static const string Report = "report";
             inline static const string Process = "process";
-            inline static const string Holiday = "holiday";
+            inline static const string Holiday = "holidays";
             inline static const string LeaveType = "leave-types";
             inline static const string Role = "roles";
 
@@ -78,6 +81,7 @@ inline const string DEFAULT_DOMAIN = "stg-kairos.bymati.vn/api";
             inline static const string ProfileAvatar = "profile/avatar";
             inline static const string ProfileSetting = "profile/setting";
             inline static const string List = "list";
+            inline static const string Batch = "batch";
             inline static const string Summary = "summary";
             inline static const string ReportBirthday = "report/birthday";
             inline static const string ReportHoliday = "report/holidays";

@@ -72,8 +72,8 @@ using Network::Helper::BaseRequest;
                 Constants::ApiModel::ModelWithoutRole.begin(),
                 Constants::ApiModel::ModelWithoutRole.end(),
                 m_Model
-                ) != Constants::ApiModel::ModelWithoutRole.end()
-            ) {
+            ) != Constants::ApiModel::ModelWithoutRole.end()
+        ) {
             this->buildPath(false);
         } else {
             this->buildPath(true);
@@ -96,7 +96,7 @@ using Network::Helper::BaseRequest;
             SIGNAL(finished(QNetworkReply*)),
             this->parent(),
             receiverSlot.c_str()
-            );
+        );
         m_LastReceiverSlot = receiverSlot;
 
         // default method is get

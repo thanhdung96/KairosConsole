@@ -15,7 +15,7 @@ namespace App {
                 LanguageMappingIterator it = DisplayLanguage::m_LstSupportedLanguages.begin();
                 it != DisplayLanguage::m_LstSupportedLanguages.end();
                 it++
-                ) {
+            ) {
                 if(it->second == key) {
                     retData = it->first;
                     break;
