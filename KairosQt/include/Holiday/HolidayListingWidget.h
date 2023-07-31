@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QNetworkReply>
+#include <QItemSelectionModel>
 #include <string>
 #include "Network/ApiHandler.h"
 #include "Model/HolidayModel.h"
@@ -48,6 +49,11 @@ private slots:
     void onHolidayFormReturned(bool withFormSubmitSuccess, string message);
     void onHolidayFormBusy(string message);
     void onHolidayFormReady(string message);
+
+    void onTableViewSelectionChanged(
+        const QItemSelection& selectedItem,
+        const QItemSelection& deselectedItem
+    );
 
 private:
     Ui::HolidayListingWidget *ui;

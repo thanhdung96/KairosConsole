@@ -134,6 +134,14 @@ void HolidayListingWidget::onFetchHolidays(QNetworkReply *reply)
     // hide Id column
     ui->tblListHolidays->hideColumn(0);
 
+    connect(
+        ui->tblListHolidays->selectionModel(),
+        SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+        this,
+        SLOT(onTableViewSelectionChanged(QItemSelection,QItemSelection))
+    );
+
+
     this->setBusy(false, "Ready");
 }
 
@@ -150,7 +158,7 @@ void HolidayListingWidget::onBtnBatchNewHolidayClicked()
 void HolidayListingWidget::onBtnEditClicked()
 {
     QModelIndex index = ui->tblListHolidays->selectionModel()->currentIndex();
-    // passing 0 to get the id, defined in RoleModel::data
+    // passing 0 to get the id, defined in HolidayModel::data
     // id column is hidden
     QVariant value = index.sibling(index.row(), 0).data();
 
@@ -165,14 +173,13 @@ void HolidayListingWidget::onCbxFilterTextChanged(const QString &currentText)
 void HolidayListingWidget::onCbxStatusTextChanged(const QString &currentText)
 {
     QModelIndex index = ui->tblListHolidays->selectionModel()->currentIndex();
-    // passing 0 to get the id, defined in RoleModel::data
+    // passing 0 to get the id, defined in HolidayModel::data
     // id column is hidden
     QVariant value = index.sibling(index.row(), 0).data();
 
     string holidayId = value.toString().toStdString();
     if(!holidayId.empty()) {
         QMessageBox msgBox;
-        msgBox.setParent(this);
         msgBox.setText("The status of the selected holiday is changed.");
         msgBox.setInformativeText("Do you want to save your changes?");
         msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -222,6 +229,24 @@ void HolidayListingWidget::onHolidayFormBusy(string message)
 void HolidayListingWidget::onHolidayFormReady(string message)
 {
     emit ready(QString::fromStdString(message));
+}
+
+void HolidayListingWidget::onTableViewSelectionChanged(const QItemSelection &selectedItem, const QItemSelection &deselectedItem)
+{
+    Q_UNUSED(deselectedItem);
+    ui->btnEdit->setDisabled(false);
+    ui->cbxStatus->setDisabled(false);
+
+    // only a single row is selected
+    QModelIndex index = selectedItem.indexes().first();
+    // passing 0 to get the id, defined in HolidayModel::data
+    // id column is hidden
+    QVariant value = index.sibling(index.row(), 0).data();
+    HolidayDto holidayDto = m_HolidayModel->getItem(value.toString());
+
+    ui->cbxStatus->blockSignals(true);
+    ui->cbxStatus->setCurrentIndex(holidayDto.isActive() ? 0 : 1);
+    ui->cbxStatus->blockSignals(false);
 }
 
 void HolidayListingWidget::onHolidayFormReturned(bool withFormSubmitSuccess, string message)

@@ -5,8 +5,10 @@
 #include <QModelIndex>
 #include <Network/Helper/BaseResponse.h>
 #include "Dto/App/StatusDto.h"
+#include "Dto/Management/AvailableTypeDto.h"
 
 using Network::Helper::BaseResponse;
+using DTO::Management::AvailableTypeDto;
 using DTO::App::StatusDto;
 
 AvailableTypeListingWidget::AvailableTypeListingWidget(QWidget *parent) :
@@ -104,6 +106,13 @@ void AvailableTypeListingWidget::onFetchTypes(QNetworkReply *reply)
     ui->tblListTypes->setModel(m_AvailableTypeModel);
     // hide Id column
     ui->tblListTypes->hideColumn(0);
+    connect(
+        ui->tblListTypes->selectionModel(),
+        SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+        this,
+        SLOT(onTableViewSelectionChanged(QItemSelection,QItemSelection))
+    );
+
 
     this->setBusy(false, "Ready");
 }
@@ -121,7 +130,7 @@ void AvailableTypeListingWidget::onTypeStatusChanged(QNetworkReply *reply)
 
 void AvailableTypeListingWidget::onBtnNewTypeClicked()
 {
-    m_AvailableTypeForm = new AvailableTypeForm(this, "");
+    m_AvailableTypeForm = new AvailableTypeForm(this, Network::Constants::BLANK);
     connect(
         m_AvailableTypeForm,
         SIGNAL(TypeFormReturned(bool, string)),
@@ -183,4 +192,24 @@ void AvailableTypeListingWidget::onTypeFormReturned(bool submitSuccess, string m
     ui->swType->removeWidget(m_AvailableTypeForm);
     ui->swType->setCurrentWidget(ui->pgTypeListing);
     m_AvailableTypeForm->deleteLater();
+}
+
+void AvailableTypeListingWidget::onTableViewSelectionChanged(
+    const QItemSelection &selectedItem,
+    const QItemSelection &deselectedItem
+) {
+    Q_UNUSED(deselectedItem);
+    ui->btnEdit->setDisabled(false);
+    ui->cbxStatus->setDisabled(false);
+
+    // only a single row is selected
+    QModelIndex index = selectedItem.indexes().first();
+    // passing 0 to get the id, defined in RoleModel::data
+    // id column is hidden
+    QVariant value = index.sibling(index.row(), 0).data();
+    AvailableTypeDto typeDto = m_AvailableTypeModel->getItem(value.toString());
+
+    ui->cbxStatus->blockSignals(true);
+    ui->cbxStatus->setCurrentIndex(typeDto.isActive() ? 0 : 1);
+    ui->cbxStatus->blockSignals(false);
 }

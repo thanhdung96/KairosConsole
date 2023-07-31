@@ -31,6 +31,7 @@ using DTO::Management::AvailableTypeDto;
         QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
         void populateData(const json& lstAvailableType);
+        const AvailableTypeDto& getItem(const QString& typeId);
 
         private:
             QList<AvailableTypeDto> m_LstAvailableType;

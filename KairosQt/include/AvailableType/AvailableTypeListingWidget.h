@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <string>
 #include <QNetworkReply>
+#include <QItemSelection>
 #include "Network/ApiHandler.h"
 #include "Network/Constants/ApiConstants.h"
 #include "Model/AvailableTypeModel.h"
@@ -44,6 +45,11 @@ private slots:
     void onCbxStatusTextChanged(const QString&);
 
     void onTypeFormReturned(bool submitSuccess, string message);
+
+    void onTableViewSelectionChanged(
+        const QItemSelection& selectedItem,
+        const QItemSelection& deselectedItem
+    );
 
 private:
     Ui::AvailableTypeListingWidget *ui;

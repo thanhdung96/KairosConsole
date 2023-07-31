@@ -1,10 +1,12 @@
 #include "Role/RoleListingWidget.h"
 #include "ui_RoleListingWidget.h"
 #include "Dto/App/StatusDto.h"
+#include "Dto/Management/RoleDto.h"
 #include "Network/Helper/BaseResponse.h"
 #include <QEventLoop>
 
 using Network::Helper::BaseResponse;
+using DTO::Management::RoleDto;
 using DTO::App::StatusDto;
 
 RoleListingWidget::RoleListingWidget(QWidget *parent) :
@@ -42,7 +44,7 @@ void RoleListingWidget::initialiseUi()
         SIGNAL(currentTextChanged(const QString&)),
         this,
         SLOT(onCbxStatusTextChanged(const QString&))
-        );
+    );
 
     QHeaderView* tblHeader = ui->tblListRoles->horizontalHeader();
     tblHeader->setSectionResizeMode(QHeaderView::ResizeMode::Stretch);
@@ -87,6 +89,12 @@ void RoleListingWidget::onFetchRoles(QNetworkReply *reply)
     ui->tblListRoles->setModel(m_RoleModel);
     // hide Id column
     ui->tblListRoles->hideColumn(0);
+    connect(
+        ui->tblListRoles->selectionModel(),
+        SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+        this,
+        SLOT(onTableViewSelectionChanged(QItemSelection,QItemSelection))
+    );
 
     this->setBusy(false, "Ready");
 }
@@ -169,6 +177,26 @@ void RoleListingWidget::onRoleFormBusy(const string &message)
 void RoleListingWidget::onRoleFormReady(const string &message)
 {
     this->setBusy(false, QString::fromStdString(message));
+}
+
+void RoleListingWidget::onTableViewSelectionChanged(
+    const QItemSelection &selectedItem,
+    const QItemSelection &deselectedItem
+) {
+    Q_UNUSED(deselectedItem);
+    ui->btnEdit->setDisabled(false);
+    ui->cbxStatus->setDisabled(false);
+
+    // only a single row is selected
+    QModelIndex index = selectedItem.indexes().first();
+    // passing 0 to get the id, defined in RoleModel::data
+    // id column is hidden
+    QVariant value = index.sibling(index.row(), 0).data();
+    RoleDto roleDto = m_RoleModel->getItem(value.toString());
+
+    ui->cbxStatus->blockSignals(true);
+    ui->cbxStatus->setCurrentIndex(roleDto.isActive() ? 0 : 1);
+    ui->cbxStatus->blockSignals(false);
 }
 
 void RoleListingWidget::setBusy(bool isBusy, QString message)
