@@ -105,4 +105,15 @@ namespace Model {
             m_LstRoles.push_back(roleDto);
         }
     }
+
+    const RoleDto &RoleModel::getItem(const QString &roleId)
+    {
+        for(size_t i = 0; i < m_LstRoles.size(); i += 1) {
+            if(m_LstRoles.at(i).getId() == roleId.toStdString()) {
+                return m_LstRoles.at(i);
+            }
+        }
+
+        return RoleDto();
+    }
 }

@@ -86,4 +86,15 @@ namespace Model {
             m_LstHolidays.push_back(holidayDto);
         }
     }
+
+    const HolidayDto &HolidayModel::getItem(const QString &holidayId)
+    {
+        for(size_t i = 0; i < m_LstHolidays.size(); i += 1) {
+            if(m_LstHolidays.at(i).getId() == holidayId.toStdString()) {
+                return m_LstHolidays.at(i);
+            }
+        }
+
+        return HolidayDto();
+    }
 }

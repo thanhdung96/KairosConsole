@@ -73,4 +73,15 @@ namespace Model {
             m_LstAvailableType.push_back(typeDto);
         }
     }
+
+    const AvailableTypeDto &AvailableTypeModel::getItem(const QString &typeId)
+    {
+        for(size_t i = 0; i < m_LstAvailableType.size(); i += 1) {
+            if(m_LstAvailableType.at(i).getId() == typeId.toStdString()) {
+                return m_LstAvailableType.at(i);
+            }
+        }
+
+        return AvailableTypeDto();
+    }
 }

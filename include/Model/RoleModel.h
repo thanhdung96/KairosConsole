@@ -38,6 +38,7 @@ using DTO::Management::RoleDto;
             bool removeColumns(int column, int count, const QModelIndex &parent = QModelIndex()) override;
 
             void populateData(const json& lstRoleDto);
+            const RoleDto& getItem(const QString& roleId);
 
         private:
             QList<RoleDto> m_LstRoles;

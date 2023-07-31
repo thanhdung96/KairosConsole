@@ -34,6 +34,7 @@ typedef map<size_t, QString> HeaderMapper;
             QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
             void populateData(const json& lstHolidayDto);
+            const HolidayDto& getItem(const QString& holidayId);
 
         private:
             QList<HolidayDto> m_LstHolidays;
