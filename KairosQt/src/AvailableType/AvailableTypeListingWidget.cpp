@@ -90,6 +90,32 @@ void AvailableTypeListingWidget::applyFilter(const string &currentText)
     this->loadAvailableTypes(filterString);
 }
 
+void AvailableTypeListingWidget::createForm(const string &availableTypeId)
+{
+    m_AvailableTypeForm = new AvailableTypeForm(this, availableTypeId);
+    connect(
+        m_AvailableTypeForm,
+        SIGNAL(TypeFormReturned(bool, string)),
+        this,
+        SLOT(onTypeFormReturned(bool, string))
+    );
+    connect(
+        m_AvailableTypeForm,
+        SIGNAL(TypeFormBusy(const string&)),
+        this,
+        SLOT(onTypeFormBusy(const string&))
+    );
+    connect(
+        m_AvailableTypeForm,
+        SIGNAL(TypeFormReady(const string&)),
+        this,
+        SLOT(onTypeFormReady(const string&))
+    );
+    ui->swType->addWidget(m_AvailableTypeForm);
+    ui->swType->setCurrentWidget(m_AvailableTypeForm);
+
+}
+
 void AvailableTypeListingWidget::onFetchTypes(QNetworkReply *reply)
 {
     QEventLoop eventLoop;
@@ -113,7 +139,6 @@ void AvailableTypeListingWidget::onFetchTypes(QNetworkReply *reply)
         SLOT(onTableViewSelectionChanged(QItemSelection,QItemSelection))
     );
 
-
     this->setBusy(false, "Ready");
 }
 
@@ -130,15 +155,7 @@ void AvailableTypeListingWidget::onTypeStatusChanged(QNetworkReply *reply)
 
 void AvailableTypeListingWidget::onBtnNewTypeClicked()
 {
-    m_AvailableTypeForm = new AvailableTypeForm(this, Network::Constants::BLANK);
-    connect(
-        m_AvailableTypeForm,
-        SIGNAL(TypeFormReturned(bool, string)),
-        this,
-        SLOT(onTypeFormReturned(bool, string))
-    );
-    ui->swType->addWidget(m_AvailableTypeForm);
-    ui->swType->setCurrentWidget(m_AvailableTypeForm);
+    this->createForm(Network::Constants::BLANK);
 }
 
 void AvailableTypeListingWidget::onBtnEditTypeClicked()
@@ -148,17 +165,7 @@ void AvailableTypeListingWidget::onBtnEditTypeClicked()
     // id column is hidden
     QVariant value = index.sibling(index.row(), 0).data();
 
-    if(value.isValid()) {
-        m_AvailableTypeForm = new AvailableTypeForm(this, value.toString().toStdString());
-        connect(
-            m_AvailableTypeForm,
-            SIGNAL(TypeFormReturned(bool, string)),
-            this,
-            SLOT(onTypeFormReturned(bool, string))
-        );
-        ui->swType->addWidget(m_AvailableTypeForm);
-        ui->swType->setCurrentWidget(m_AvailableTypeForm);
-    }
+    this->createForm(value.toString().toStdString());
 }
 
 void AvailableTypeListingWidget::onCbxFilterTextChanged(const QString &currentText)
@@ -180,7 +187,7 @@ void AvailableTypeListingWidget::onCbxStatusTextChanged(const QString &currentTe
         statusDto.setActive(currentText == "Active");
 
         m_ApiHandler.setMModel(Network::Constants::ApiModel::LeaveType);
-        m_ApiHandler.setMAction("");
+        m_ApiHandler.setMAction(Network::Constants::BLANK);
         m_ApiHandler.pushQuery(value.toString().toStdString());
         m_ApiHandler.setRequestBody(statusDto.ToJson(true).dump());
         m_ApiHandler.Execute(ApiHandler::RequestMethod::PATCH, SLOT(onTypeStatusChanged(QNetworkReply*)));
@@ -192,6 +199,22 @@ void AvailableTypeListingWidget::onTypeFormReturned(bool submitSuccess, string m
     ui->swType->removeWidget(m_AvailableTypeForm);
     ui->swType->setCurrentWidget(ui->pgTypeListing);
     m_AvailableTypeForm->deleteLater();
+
+    if(submitSuccess) {
+        this->applyFilter(ui->cbxFilter->currentText().toStdString());
+    } else {
+        this->setBusy(false, QString::fromStdString(message));
+    }
+}
+
+void AvailableTypeListingWidget::onTypeFormBusy(const string &message)
+{
+    this->setBusy(true, QString::fromStdString(message));
+}
+
+void AvailableTypeListingWidget::onTypeFormReady(const string &message)
+{
+    this->setBusy(false, QString::fromStdString(message));
 }
 
 void AvailableTypeListingWidget::onTableViewSelectionChanged(

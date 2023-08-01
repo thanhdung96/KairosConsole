@@ -32,6 +32,7 @@ private:
     void initialiseUi();
     void loadRoles(const string& filter = Constants::Query::All);
     void applyFilter(const string& currentText);
+    void createForm(const string& roleId);
 
 private slots:
     void onFetchRoles(QNetworkReply* reply);

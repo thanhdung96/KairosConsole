@@ -111,7 +111,6 @@ namespace DTO::Management {
     json AvailableTypeDto::ToJson(bool toSubmit)
     {
         json jsonObject;
-        jsonObject["id"] = m_Id;
         jsonObject["name"] = m_Name;
         jsonObject["description"] = m_Description;
         jsonObject["maximumDay"] = m_MaximumDay;

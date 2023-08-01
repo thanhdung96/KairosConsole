@@ -15,6 +15,7 @@ AvailableTypeForm::AvailableTypeForm(QWidget *parent, const string& typeId) :
     ui->setupUi(this);
     this->initialiseUi();
     m_ApiHandler.setParent(this);
+    m_ApiHandler.setMModel(Network::Constants::ApiModel::LeaveType);
     m_ApiHandler.setMDomain(Network::Constants::DEFAULT_DOMAIN);
 
     m_TypeId = typeId;
@@ -67,16 +68,15 @@ void AvailableTypeForm::onBtnSaveClicked()
     typeDto.setUnpaid(ui->cbxUnpaid->isChecked());
     typeDto.setActive(true);
 
-    m_ApiHandler.setMModel(Network::Constants::ApiModel::LeaveType);
-    m_ApiHandler.setMAction("");
+    m_ApiHandler.setMAction(Network::Constants::BLANK);
     if(m_TypeId.empty()) {
         m_ApiHandler.setRequestBody(typeDto.ToJson(true).dump());
-        m_ApiHandler.Execute(ApiHandler::RequestMethod::POST, SLOT(onRoleSaved(QNetworkReply*)));
+        m_ApiHandler.Execute(ApiHandler::RequestMethod::POST, SLOT(onAvailableTypeSaved(QNetworkReply*)));
     } else {
         typeDto.setActive(ui->cbxActive->isChecked());
         m_ApiHandler.pushQuery(m_TypeId);
         m_ApiHandler.setRequestBody(typeDto.ToJson(true).dump());
-        m_ApiHandler.Execute(ApiHandler::RequestMethod::PATCH, SLOT(onRoleSaved(QNetworkReply*)));
+        m_ApiHandler.Execute(ApiHandler::RequestMethod::PATCH, SLOT(onAvailableTypeSaved(QNetworkReply*)));
     }
 }
 
@@ -93,7 +93,10 @@ void AvailableTypeForm::onAvailableTypeSaved(QNetworkReply *reply)
                           QString(reply->readAll()).toStdString());
     reply->deleteLater();
 
-    if(response.ResponseCode() == BaseResponse::Status::HTTP_OK) {
+    if(
+        response.ResponseCode() == BaseResponse::Status::HTTP_OK ||
+        response.ResponseCode() == BaseResponse::Status::HTTP_CREATED
+    ) {
         emit TypeFormReturned(true, "Available Type saved.");
     } else {
         this->setBusy(false, QString::fromStdString(response.GetRawResponse()));
@@ -104,7 +107,6 @@ void AvailableTypeForm::loadTypeDetail()
 {
     this->setBusy(true, "Fetching Available Type Detail");
 
-    m_ApiHandler.setMModel(Network::Constants::ApiModel::LeaveType);
     m_ApiHandler.pushQuery(m_TypeId);
     m_ApiHandler.Execute(
         ApiHandler::RequestMethod::GET,

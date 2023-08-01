@@ -35,6 +35,7 @@ private:
     void initialiseUi();
     void loadAvailableTypes(const string& filter = Network::Constants::Query::All);
     void applyFilter(const string& filterString);
+    void createForm(const string& availableTypeId);
 
 private slots:
     void onFetchTypes(QNetworkReply* reply);
@@ -45,6 +46,8 @@ private slots:
     void onCbxStatusTextChanged(const QString&);
 
     void onTypeFormReturned(bool submitSuccess, string message);
+    void onTypeFormBusy(const string& message);
+    void onTypeFormReady(const string& message);
 
     void onTableViewSelectionChanged(
         const QItemSelection& selectedItem,
