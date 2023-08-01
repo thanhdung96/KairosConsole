@@ -15,7 +15,9 @@ RoleListingWidget::RoleListingWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     m_ApiHandler.setParent(this);
+    m_ApiHandler.setMModel(Constants::ApiModel::Role);
     m_ApiHandler.setMDomain(Constants::DEFAULT_DOMAIN);
+
     this->initialiseUi();
     this->loadRoles();
 }
@@ -55,7 +57,6 @@ void RoleListingWidget::initialiseUi()
 void RoleListingWidget::loadRoles(const string& filter)
 {
     this->setBusy(true, "Loading available roles...");
-    m_ApiHandler.setMModel(Constants::ApiModel::Role);
     m_ApiHandler.setMAction(Constants::ApiAction::List);
     m_ApiHandler.pushQuery(filter);
     m_ApiHandler.Execute(ApiHandler::RequestMethod::GET, SLOT(onFetchRoles(QNetworkReply*)));
@@ -71,6 +72,14 @@ void RoleListingWidget::applyFilter(const string &currentText)
     }
 
     this->loadRoles(filterString);
+}
+
+void RoleListingWidget::createForm(const string &roleId)
+{
+    m_RoleForm = new RoleForm(this, roleId);
+    connect(m_RoleForm, SIGNAL(RoleFormReturned(bool,string)), this, SLOT(onRoleFormReturned(bool,string)));
+    ui->swRole->addWidget(m_RoleForm);
+    ui->swRole->setCurrentWidget(m_RoleForm);
 }
 
 void RoleListingWidget::onFetchRoles(QNetworkReply *reply)
@@ -101,10 +110,7 @@ void RoleListingWidget::onFetchRoles(QNetworkReply *reply)
 
 void RoleListingWidget::onBtnNewRoleClicked()
 {
-    m_RoleForm = new RoleForm(this, "");
-    connect(m_RoleForm, SIGNAL(RoleFormReturned(bool,string)), this, SLOT(onRoleFormReturned(bool,string)));
-    ui->swRole->addWidget(m_RoleForm);
-    ui->swRole->setCurrentWidget(m_RoleForm);
+    this->createForm(Network::Constants::BLANK);
 }
 
 void RoleListingWidget::onBtnEditRoleClicked()
@@ -115,10 +121,7 @@ void RoleListingWidget::onBtnEditRoleClicked()
     QVariant value = index.sibling(index.row(), 0).data();
 
     if(value.isValid()) {
-        m_RoleForm = new RoleForm(this, value.toString().toStdString());
-        connect(m_RoleForm, SIGNAL(RoleFormReturned(bool,string)), this, SLOT(onRoleFormReturned(bool,string)));
-        ui->swRole->addWidget(m_RoleForm);
-        ui->swRole->setCurrentWidget(m_RoleForm);
+        this->createForm(value.toString().toStdString());
     }
 }
 
@@ -140,8 +143,7 @@ void RoleListingWidget::onCbxStatusTextChanged(const QString &currentText)
         StatusDto statusDto;
         statusDto.setActive(currentText == "Active");
 
-        m_ApiHandler.setMModel(Network::Constants::ApiModel::Role);
-        m_ApiHandler.setMAction("");
+        m_ApiHandler.setMAction(Network::Constants::BLANK);
         m_ApiHandler.pushQuery(value.toString().toStdString());
         m_ApiHandler.setRequestBody(statusDto.ToJson(true).dump());
         m_ApiHandler.Execute(ApiHandler::RequestMethod::PATCH, SLOT(onRoleStatusChanged(QNetworkReply*)));

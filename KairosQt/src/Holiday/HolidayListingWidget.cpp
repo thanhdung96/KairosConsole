@@ -256,7 +256,7 @@ void HolidayListingWidget::onHolidayFormReturned(bool withFormSubmitSuccess, str
     ui->swHoliday->setCurrentWidget(ui->pgHolidayListing);
     sender->deleteLater();
     if(withFormSubmitSuccess) {
-        this->loadHoliday(Network::Constants::Query::All);
+        this->applyFilter(ui->cbxFilter->currentText().toStdString());
     } else {
         this->setBusy(false, QString::fromStdString(message));
     }
