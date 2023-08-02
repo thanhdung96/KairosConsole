@@ -28,6 +28,7 @@ SOURCES += \
     KairosQt/src/Role/RoleForm.cpp \
     KairosQt/src/Role/RoleListingWidget.cpp \
     KairosQt/src/Security/logindialog.cpp \
+    KairosQt/src/User/UserListingWidget.cpp \
     main.cpp \
     KairosQt/src/mainwindow.cpp \
     src/App/DisplayLanguage.cpp \
@@ -50,12 +51,14 @@ SOURCES += \
     src/Model/AvailableTypeModel.cpp \
     src/Model/HolidayModel.cpp \
     src/Model/RoleModel.cpp \
+    src/Model/UserModel.cpp \
     src/Network/ApiHandler.cpp \
     src/Network/Helper/BaseRequest.cpp \
     src/Network/Helper/BaseResponse.cpp \
     src/Network/Helper/UriBuilder.cpp
 
 HEADERS += \
+    KairosQt/include/User/UserListingWidget.h \
     KairosQt/include/App/PreferenceWidget.h \
     KairosQt/include/App/myprofilewidget.h \
     KairosQt/include/AvailableType/AvailableTypeForm.h \
@@ -89,6 +92,7 @@ HEADERS += \
     include/Model/AvailableTypeModel.h \
     include/Model/HolidayModel.h \
     include/Model/RoleModel.h \
+    include/Model/UserModel.h \
     include/Network/ApiHandler.h \
     include/Network/Helper/BaseRequest.h \
     include/Network/Helper/BaseResponse.h \
@@ -106,7 +110,8 @@ FORMS += \
     KairosQt/design/Role/RoleForm.ui \
     KairosQt/design/Role/RoleListingWidget.ui \
     KairosQt/design/Security/logindialog.ui \
-    KairosQt/design/mainwindow.ui \
+    KairosQt/design/User/UserListingWidget.ui \
+    KairosQt/design/mainwindow.ui
 
 # Translation
 TRANSLATIONS = translation/main.en.ts translation/main.fr.ts translation/main.vi.ts

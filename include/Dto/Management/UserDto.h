@@ -17,6 +17,8 @@ using json = nlohmann::json;
             UserDto() = default;
             ~UserDto() = default;
 
+            string getId() const;
+            void setId(const string &newId);
             string getLastName() const;
             void setLastName(const string &newLastName);
             string getFirstName() const;
@@ -52,6 +54,7 @@ using json = nlohmann::json;
             json ToJson(bool toSubmit) override;
 
         private:
+            string m_Id;
             string m_LastName;
             string m_FirstName;
             string m_Dob;

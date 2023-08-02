@@ -1,6 +1,16 @@
 #include "Dto/Management/UserDto.h"
 
 namespace DTO::Management {
+string UserDto::getId() const
+    {
+        return m_Id;
+    }
+
+    void UserDto::setId(const string &newId)
+    {
+        m_Id = newId;
+    }
+
     string UserDto::getLastName() const
     {
         return m_LastName;
@@ -153,6 +163,7 @@ namespace DTO::Management {
 
     void UserDto::FromJson(const json &jsonObject)
     {
+        m_Id = jsonObject["id"];
         m_LastName = jsonObject["lastName"];
         m_FirstName = jsonObject["firstName"];
         m_Dob = jsonObject["dob"];
