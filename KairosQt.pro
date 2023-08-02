@@ -39,8 +39,10 @@ SOURCES += \
     src/Dto/App/StatusDto.cpp \
     src/Dto/BaseDto.cpp \
     src/Dto/Management/AvailableTypeDto.cpp \
+    src/Dto/Management/ContactPerson.cpp \
     src/Dto/Management/HolidayDto.cpp \
     src/Dto/Management/RoleDto.cpp \
+    src/Dto/Management/UserDto.cpp \
     src/Dto/Security/ActivateDto.cpp \
     src/Dto/Security/BaseSecurityDto.cpp \
     src/Dto/Security/ChangePasswordDto.cpp \
@@ -78,10 +80,12 @@ HEADERS += \
     include/Dto/Management/AvailableTypeDto.h \
     include/Dto/Management/HolidayDto.h \
     include/Dto/Management/RoleDto.h \
+    include/Dto/Management/UserDto.h \
     include/Dto/Security/ActivateDto.h \
     include/Dto/Security/BaseSecurityDto.h \
     include/Dto/Security/ChangePasswordDto.h \
     include/Dto/Security/LoginDto.h \
+    include/Dto/management/ContactPerson.h \
     include/Model/AvailableTypeModel.h \
     include/Model/HolidayModel.h \
     include/Model/RoleModel.h \
